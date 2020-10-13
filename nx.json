@@ -22,5 +22,16 @@
       }
     }
   },
-  "projects": {}
+  "projects": {
+    "alias-game-frontend": {
+      "tags": []
+    },
+    "alias-game-frontend-e2e": {
+      "tags": [],
+      "implicitDependencies": ["alias-game-frontend"]
+    },
+    "alias-game": {
+      "tags": []
+    }
+  }
 }

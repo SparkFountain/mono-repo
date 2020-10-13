@@ -1,7 +1,174 @@
 {
   "version": 1,
-  "projects": {},
+  "projects": {
+    "alias-game-frontend": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/alias-game-frontend",
+      "sourceRoot": "apps/alias-game-frontend/src",
+      "prefix": "spark-fountain",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/alias-game-frontend",
+            "index": "apps/alias-game-frontend/src/index.html",
+            "main": "apps/alias-game-frontend/src/main.ts",
+            "polyfills": "apps/alias-game-frontend/src/polyfills.ts",
+            "tsConfig": "apps/alias-game-frontend/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/alias-game-frontend/src/favicon.ico",
+              "apps/alias-game-frontend/src/assets"
+            ],
+            "styles": ["apps/alias-game-frontend/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/alias-game-frontend/src/environments/environment.ts",
+                  "with": "apps/alias-game-frontend/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "alias-game-frontend:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "alias-game-frontend:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "alias-game-frontend:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/alias-game-frontend/tsconfig.app.json",
+              "apps/alias-game-frontend/tsconfig.spec.json",
+              "apps/alias-game-frontend/tsconfig.editor.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/alias-game-frontend/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/alias-game-frontend/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "alias-game-frontend-e2e": {
+      "root": "apps/alias-game-frontend-e2e",
+      "sourceRoot": "apps/alias-game-frontend-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/alias-game-frontend-e2e/cypress.json",
+            "tsConfig": "apps/alias-game-frontend-e2e/tsconfig.e2e.json",
+            "devServerTarget": "alias-game-frontend:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "alias-game-frontend:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/alias-game-frontend-e2e/tsconfig.e2e.json"],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/alias-game-frontend-e2e/**/*"
+            ]
+          }
+        }
+      }
+    },
+    "alias-game": {
+      "projectType": "library",
+      "root": "libs/alias-game",
+      "sourceRoot": "libs/alias-game/src",
+      "prefix": "spark-fountain",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/alias-game/tsconfig.lib.json",
+              "libs/alias-game/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/alias-game/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/alias-game/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      }
+    }
+  },
   "cli": {
-    "defaultCollection": "@nrwl/workspace"
-  }
+    "defaultCollection": "@nrwl/nest",
+    "analytics": false
+  },
+  "schematics": {
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    }
+  },
+  "defaultProject": "alias-game-frontend"
 }

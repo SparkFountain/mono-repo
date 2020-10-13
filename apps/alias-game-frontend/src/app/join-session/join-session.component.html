@@ -1,0 +1,57 @@
+<div class="menu-container">
+  <h2>Nimm an einer Session teil</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <td>Session</td>
+        <td>Erstellt von</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let session of sessions2Join"
+        [ngClass]="{ active: selectedSession2Join?.name === session.name }"
+        (click)="selectSession2Join(session)"
+      >
+        <td>{{ session.name }}</td>
+        <td>{{ session.creator }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <br />
+
+  <div class="form-group" *ngIf="selectedSession2Join">
+    <label>Wer bist du?</label>
+    <input
+      [(ngModel)]="participant"
+      type="text"
+      maxlength="16"
+      placeholder="Mr(s). Anonymous"
+    />
+  </div>
+
+  <div class="form-group" *ngIf="selectedSession2Join">
+    <label>In welches Team gehst du?</label>
+    <select [(ngModel)]="selectedTeam2Join" (change)="updateTeamMembers()">
+      <option *ngFor="let team of selectedSession2Join.teams">{{
+        team.name
+      }}</option>
+    </select>
+  </div>
+  <br *ngIf="!selectedTeam2Join" />
+
+  <div class="form-group" *ngIf="selectedTeam2Join">
+    <p>In Team {{ selectedTeam2Join }} {{ teamMembers }}.</p>
+  </div>
+
+  <div class="form-group">
+    <button
+      (click)="joinSession()"
+      [disabled]="!selectedSession2Join || !selectedTeam2Join"
+    >
+      Beitreten
+    </button>
+    <button [routerLink]="'/willkommen'">Abbrechen</button>
+  </div>
+</div>

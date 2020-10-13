@@ -1,0 +1,156 @@
+@import './variables.scss';
+
+body {
+  background: url(assets/background.jpg);
+  background-size: cover;
+  font-family: 'Baloo Bhaina 2', cursive;
+}
+
+h1 {
+  text-align: center;
+  font-family: 'Indie Flower', cursive;
+  font-size: 80px;
+  margin: 20px 0;
+  text-shadow: 0 0 10px $sea;
+  color: $black;
+}
+
+b {
+  font-family: 'Baloo Bhaina 2', cursive;
+}
+
+button {
+  font-family: 'Baloo Bhaina 2', cursive;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 8px 20px;
+  box-shadow: 0 0 5px $black;
+  border: none;
+
+  &:hover {
+    background: darken($white, 5%);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  input,
+  select {
+    width: $create-game-field;
+    font-family: 'Baloo Bhaina 2', cursive;
+    font-size: 16px;
+    padding: $create-game-field-padding;
+  }
+
+  input {
+    box-sizing: border-box;
+  }
+
+  p {
+    line-height: 150%;
+  }
+
+  .color-picker {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    margin: 0;
+    padding: 0 !important;
+    border: none;
+    box-shadow: 0 0 3px $black;
+  }
+}
+
+.active {
+  color: $active;
+}
+
+.positive {
+  background: $sea;
+  color: $white;
+
+  &:hover {
+    background: darken($sea, 10%);
+    color: $white;
+  }
+}
+
+.negative {
+  background: $active;
+  color: $white;
+
+  &:hover {
+    background: darken($active, 10%);
+    color: $white;
+  }
+}
+
+.menu-container {
+  width: $create-game-width;
+  height: auto;
+  margin-left: calc(50% - #{$create-game-width} / 2);
+  padding-bottom: 20px;
+  border: 1px solid $black;
+  border-radius: 10px;
+  background: $blur;
+  box-shadow: $dark-shadow;
+
+  h2 {
+    text-align: center;
+  }
+
+  .form-group {
+    margin: 10px 50px;
+  }
+
+  table {
+    table-layout: fixed;
+    width: calc(100% - 100px);
+    margin: 0 50px;
+    box-sizing: border-box;
+    border-collapse: collapse;
+
+    thead {
+      font-weight: bold;
+    }
+
+    tbody {
+      tr {
+        cursor: pointer;
+
+        &.active {
+          background: $active;
+          color: lighten($white, 10%) !important;
+        }
+
+        &:hover {
+          background: $sea;
+          color: lighten($white, 10%);
+
+          &.active {
+            background: darken($active, 10%);
+            color: lighten($white, 10%) !important;
+          }
+        }
+      }
+    }
+
+    td {
+      padding: 5px 15px;
+    }
+  }
+
+  table,
+  th,
+  td {
+    border: 1px solid $black;
+  }
+}

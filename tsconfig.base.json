@@ -15,7 +15,9 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@spark-fountain/alias-game": ["libs/alias-game/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
