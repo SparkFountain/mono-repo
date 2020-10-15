@@ -155,6 +155,56 @@
           "style": "scss"
         }
       }
+    },
+    "alias-game-backend": {
+      "root": "apps/alias-game-backend",
+      "sourceRoot": "apps/alias-game-backend/src",
+      "projectType": "application",
+      "prefix": "alias-game-backend",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/alias-game-backend",
+            "main": "apps/alias-game-backend/src/main.ts",
+            "tsConfig": "apps/alias-game-backend/tsconfig.app.json",
+            "assets": ["apps/alias-game-backend/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/alias-game-backend/src/environments/environment.ts",
+                  "with": "apps/alias-game-backend/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "alias-game-backend:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/alias-game-backend/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/alias-game-backend/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "cli": {

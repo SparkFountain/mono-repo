@@ -32,6 +32,9 @@
     },
     "alias-game": {
       "tags": []
+    },
+    "alias-game-backend": {
+      "tags": []
     }
   }
 }
