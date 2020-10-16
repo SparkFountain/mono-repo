@@ -87,7 +87,7 @@ export class BoardComponent implements OnInit {
 
     this.http
       .post(
-        `${environment.server}/select-card`,
+        `/api/select-card`,
         body.toString(),
         environment.formHeader
       )
@@ -133,13 +133,13 @@ export class BoardComponent implements OnInit {
         //   body.set('black', this.selectedCards.black.toString());
 
         //   this.http
-        //     .post(`${environment.server}/add-history-event`, body.toString(), environment.formHeader)
+        //     .post(`/api/add-history-event`, body.toString(), environment.formHeader)
         //     .toPromise()
         //     .then(() => {
         //       body = new URLSearchParams();
         //       body.set('session', this._activeSession.name);
 
-        //       this.http.post(`${environment.server}/next-round`, body.toString(), environment.formHeader).toPromise();
+        //       this.http.post(`/api/next-round`, body.toString(), environment.formHeader).toPromise();
         //     });
         // }
       });
@@ -161,7 +161,7 @@ export class BoardComponent implements OnInit {
 
     this.http
       .post(
-        `${environment.server}/add-history-event`,
+        `/api/add-history-event`,
         body.toString(),
         environment.formHeader
       )
@@ -171,7 +171,7 @@ export class BoardComponent implements OnInit {
         body.set('session', this._activeSession.name);
         this.http
           .post(
-            `${environment.server}/next-round`,
+            `/api/next-round`,
             body.toString(),
             environment.formHeader
           )
@@ -192,7 +192,7 @@ export class BoardComponent implements OnInit {
 
     this.http
       .post(
-        `${environment.server}/exchange-term`,
+        `/api/exchange-term`,
         body.toString(),
         environment.formHeader
       )

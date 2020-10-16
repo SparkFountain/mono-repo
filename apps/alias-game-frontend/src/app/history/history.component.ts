@@ -28,7 +28,7 @@ export class HistoryComponent implements OnInit {
 
     setInterval(() => {
       this.http
-        .get(`${environment.server}/fetch-history`, {
+        .get(`/api/fetch-history`, {
           params: { session: this._activeSession.name },
         })
         .toPromise()

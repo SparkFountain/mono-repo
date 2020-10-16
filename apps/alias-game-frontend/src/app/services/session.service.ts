@@ -9,10 +9,11 @@ import { environment } from '../../environments/environment';
 export class SessionService {
   constructor(private http: HttpClient) {}
 
+  // TODO: completely refactor (use websocket broadcasting)
   fetchActiveSession(sessionName: string): Promise<Response<ActiveSession>> {
     return this.http
       .get<Response<ActiveSession>>(
-        `${environment.server}/fetch-session?session=${sessionName}`
+        `/api/fetch-session?session=${sessionName}`
       )
       .toPromise();
   }

@@ -118,7 +118,7 @@ export class CreateNewSessionComponent implements OnInit {
 
     this.http
       .post(
-        `${environment.server}/create-session`,
+        `/api/create-session`,
         body.toString(),
         environment.formHeader
       )

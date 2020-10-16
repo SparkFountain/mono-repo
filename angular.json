@@ -62,7 +62,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "alias-game-frontend:build"
+            "browserTarget": "alias-game-frontend:build",
+            "proxyConfig": "apps/alias-game-frontend/proxy.config.json"
           },
           "configurations": {
             "production": {

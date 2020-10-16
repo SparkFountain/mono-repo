@@ -66,7 +66,7 @@ export class PlayComponent implements OnInit {
     // body.set('player', this.user.player);
     // this.http
     //   .post(
-    //     `${environment.server}/request-active-player`,
+    //     `${/api}/request-active-player`,
     //     body.toString(),
     //     environment.formHeader
     //   )
@@ -83,7 +83,7 @@ export class PlayComponent implements OnInit {
     // body.set('session', this.user.session);
     // this.http
     //   .post(
-    //     `${environment.server}/reset-session`,
+    //     `${/api}/reset-session`,
     //     body.toString(),
     //     environment.formHeader
     //   )

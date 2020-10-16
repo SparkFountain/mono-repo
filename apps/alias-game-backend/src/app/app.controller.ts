@@ -18,7 +18,7 @@ export class AppController {
     return this.appService.getData();
   }
 
-  @Post()
+  @Post('create-session')
   createSession(@Body() session: ActiveSession): Response<ActiveSession> {
     // TODO: implement
     return null;

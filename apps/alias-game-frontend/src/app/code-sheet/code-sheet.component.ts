@@ -88,7 +88,7 @@ export class CodeSheetComponent implements OnInit {
 
     this.http
       .post(
-        `${environment.server}/request-description`,
+        `/api/request-description`,
         body.toString(),
         environment.formHeader
       )
@@ -101,7 +101,7 @@ export class CodeSheetComponent implements OnInit {
 
     this.http
       .post(
-        `${environment.server}/accept-description`,
+        `/api/accept-description`,
         body.toString(),
         environment.formHeader
       )
@@ -114,7 +114,7 @@ export class CodeSheetComponent implements OnInit {
 
     this.http
       .post(
-        `${environment.server}/deny-description`,
+        `/api/deny-description`,
         body.toString(),
         environment.formHeader
       )

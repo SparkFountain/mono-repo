@@ -59,7 +59,7 @@ export class PlayersComponent implements OnInit {
     // body.set('player', 'TODO');
 
     // this.http
-    //   .post(`${environment.server}/request-active-player`, body.toString())
+    //   .post(`/api/request-active-player`, body.toString())
     //   .toPromise()
     //   .then((response: Response<void>) => {});
   }
@@ -81,7 +81,7 @@ export class PlayersComponent implements OnInit {
 
       this.http
         .post(
-          `${environment.server}/start-session`,
+          `/api/start-session`,
           body.toString(),
           environment.formHeader
         )
@@ -98,7 +98,7 @@ export class PlayersComponent implements OnInit {
     body.set('session', this._activeSession.name);
     this.http
       .post(
-        `${environment.server}/next-round`,
+        `/api/next-round`,
         body.toString(),
         environment.formHeader
       )
@@ -111,7 +111,7 @@ export class PlayersComponent implements OnInit {
     // // body.set('player', this._activeSession.name);
 
     // this.http.post(
-    //   `${environment.server}/leave-session`,
+    //   `/api/leave-session`,
     //   body.toString(),
     //   environment.formHeader
     // );

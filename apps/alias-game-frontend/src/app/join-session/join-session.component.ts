@@ -47,7 +47,7 @@ export class JoinSessionComponent implements OnInit {
 
   getSessions(): void {
     this.http
-      .get(`${environment.server}/get-sessions`)
+      .get(`/api/get-sessions`)
       .toPromise()
       .then((response: Response<JoinSession[]>) => {
         this.sessions2Join = response.data;
@@ -100,7 +100,7 @@ export class JoinSessionComponent implements OnInit {
 
     this.http
       .post(
-        `${environment.server}/join-session`,
+        `/api/join-session`,
         body.toString(),
         environment.formHeader
       )
