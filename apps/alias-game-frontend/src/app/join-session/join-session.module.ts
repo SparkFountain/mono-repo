@@ -8,5 +8,6 @@ import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [JoinSessionComponent],
   imports: [CommonModule, JoinSessionRoutingModule, FormsModule],
+  exports: [JoinSessionComponent],
 })
 export class JoinSessionModule {}

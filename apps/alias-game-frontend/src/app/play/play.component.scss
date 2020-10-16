@@ -1,0 +1,42 @@
+@import '../../styles.scss';
+
+.game {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+
+  width: 100%;
+  height: auto;
+
+  app-players {
+    width: 15vw;
+  }
+
+  app-board {
+    width: 60vw;
+  }
+
+  .ui-right {
+    width: 15vw;
+    display: flex;
+    flex-direction: column;
+
+    app-code-sheet {
+      box-shadow: $dark-shadow;
+      background: $blur;
+    }
+
+    app-history {
+    }
+  }
+
+  app-winner {
+    display: block;
+    position: fixed;
+    width: 500px;
+    height: 500px;
+    background: $thick-blur;
+    border: 1px solid $black;
+    box-shadow: $dark-shadow;
+  }
+}

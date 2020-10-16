@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActiveSession } from '@spark-fountain/alias-game';
 
 @Component({
   selector: 'spark-fountain-play',
@@ -6,8 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./play.component.scss'],
 })
 export class PlayComponent implements OnInit {
+  public page: string;  // TODO: use or remove this variable?
+
+  public activeSession: ActiveSession;
+
+  public participant: string;
+
   public winnerTeam: string;
+
   public noActivePlayer: boolean;
+  public iAmActivePlayer: boolean;
 
   constructor() {}
 

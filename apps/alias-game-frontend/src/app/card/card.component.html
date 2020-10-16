@@ -1,1 +1,19 @@
-<p>card works!</p>
+<div
+  class="exchange-word"
+  *ngIf="_allowExchangeCards"
+  (click)="exchangeWordAction()"
+>
+  <i class="fa fa-exchange" aria-hidden="true"></i>
+</div>
+<div
+  class="card animated infinite"
+  [ngClass]="{ flipOutY: flipCard }"
+  [ngStyle]="{
+    width: width + 'px',
+    height: height + 'px',
+    background: getBackground(),
+    cursor: _iAmActivePlayer && !_allowExchangeCards ? 'pointer' : 'default'
+  }"
+>
+  <p class="word" [ngStyle]="{ 'font-size': width / 9 + 'px' }">{{ _word }}</p>
+</div>

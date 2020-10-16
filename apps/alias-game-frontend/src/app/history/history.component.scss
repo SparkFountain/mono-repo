@@ -1,0 +1,30 @@
+@import '../../variables.scss';
+
+:host {
+  margin-top: 30px;
+}
+
+table {
+  table-layout: fixed;
+  width: 100%;
+  box-sizing: border-box;
+  border-collapse: collapse;
+  text-align: center;
+  background: $blur;
+  border: 1px solid $black;
+  box-shadow: $dark-shadow;
+
+  thead {
+    font-weight: bold;
+  }
+}
+
+.color {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  line-height: 28px;
+  text-align: center;
+  font-weight: bold;
+}

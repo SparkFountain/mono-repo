@@ -1,15 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
-  selector: 'spark-fountain-winner',
+  selector: 'spark-fountain-alias-game-winner',
   templateUrl: './winner.component.html',
-  styleUrls: ['./winner.component.scss']
+  styleUrls: ['./winner.component.scss'],
 })
 export class WinnerComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
+  _winnerTeam: string;
+  @Input()
+  set winnerTeam(value: string) {
+    this._winnerTeam = value;
   }
+  @Output() reset: EventEmitter<void> = new EventEmitter<void>();
 
+  constructor() {}
+
+  ngOnInit(): void {}
+
+  resetSession(): void {
+    this.reset.emit();
+  }
 }

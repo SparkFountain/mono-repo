@@ -6,38 +6,3 @@
     Einer Session beitreten
   </button>
 </div>
-
-<!-- TODO: refactor -->
-<!-- <div class="game" *ngIf="page === 'play'">
-  <spark-fountain-alias-game-players
-    [activeSession]="activeSession"
-    (activePlayer)="iAmActivePlayer = $event"
-    (leave)="page = 'welcome'"
-  ></spark-fountain-alias-game-players>
-  <spark-fountain-alias-game-board
-    [activeSession]="activeSession"
-    [participant]="participant"
-    [iAmActivePlayer]="iAmActivePlayer"
-  ></spark-fountain-alias-game-board>
-  <div class="ui-right">
-    <spark-fountain-alias-game-code-sheet
-      [activeSession]="activeSession"
-      *ngIf="iAmActivePlayer"
-    ></spark-fountain-alias-game-code-sheet>
-    <button
-      *ngIf="!iAmActivePlayer && !activeSession.started && noActivePlayer"
-      (click)="requestActivePlayer()"
-    >
-      Ich möchte Begriffe erklären
-    </button>
-    <spark-fountain-alias-game-history
-      [activeSession]="activeSession"
-    ></spark-fountain-alias-game-history>
-  </div>
-
-  <spark-fountain-alias-game-winner
-    *ngIf="winnerTeam !== ''"
-    [winnerTeam]="winnerTeam"
-    (reset)="resetSession()"
-  ></spark-fountain-alias-game-winner>
-</div> -->

@@ -1,1 +1,15 @@
-<p>board works!</p>
+<div class="row" *ngFor="let cardRow of cards; let y = index">
+  <spark-fountain-alias-game-card
+    (click)="selectCard(x, y)"
+    *ngFor="let card of cardRow; let x = index"
+    [word]="card.word"
+    [color]="card.color"
+    [uncovered]="card.uncovered"
+    [width]="cardSize.width"
+    [height]="cardSize.height"
+    [flipCard]="false"
+    [iAmActivePlayer]="_iAmActivePlayer"
+    [allowExchangeCards]="!_activeSession.started"
+    (exchangeWord)="exchangeTerm($event)"
+  ></spark-fountain-alias-game-card>
+</div>
