@@ -1,3 +1,20 @@
 <h1>Alias Game</h1>
 
+<table>
+  <thead>
+    <tr>
+      <th>Minute</th>
+      <th>Aktion</th>
+      <th>Beschreibung</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let tickerMessage of tickerMessages">
+      <td>{{ tickerMessage.timeInSec }}</td>
+      <td>{{ tickerMessage.type }}</td>
+      <td>{{ tickerMessage.message }}</td>
+    </tr>
+  </tbody>
+</table>
+
 <router-outlet></router-outlet>

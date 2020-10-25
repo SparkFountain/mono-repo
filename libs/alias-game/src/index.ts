@@ -13,3 +13,5 @@ export * from './lib/interfaces/term';
 export * from './lib/interfaces/theme';
 export * from './lib/interfaces/user';
 export * from './lib/interfaces/word-exchange';
+
+export * from './lib/interfaces/ticker-message';

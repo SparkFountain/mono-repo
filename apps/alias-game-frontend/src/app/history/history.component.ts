@@ -26,19 +26,19 @@ export class HistoryComponent implements OnInit {
   ngOnInit(): void {
     this.historyEvents = [];
 
-    setInterval(() => {
-      this.http
-        .get(`/api/fetch-history`, {
-          params: { session: this._activeSession.name },
-        })
-        .toPromise()
-        .then((response: Response<HistoryEvent[]>) => {
-          this.historyEvents = [];
+    // setInterval(() => {
+    //   this.http
+    //     .get(`/api/fetch-history`, {
+    //       params: { session: this._activeSession.name },
+    //     })
+    //     .toPromise()
+    //     .then((response: Response<HistoryEvent[]>) => {
+    //       this.historyEvents = [];
 
-          response.data.forEach((event: HistoryEvent) => {
-            this.historyEvents.push(event);
-          });
-        });
-    }, 1000);
+    //       response.data.forEach((event: HistoryEvent) => {
+    //         this.historyEvents.push(event);
+    //       });
+    //     });
+    // }, 1000);
   }
 }

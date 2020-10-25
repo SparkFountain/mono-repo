@@ -7,7 +7,7 @@ import { ActiveSession } from '@spark-fountain/alias-game';
   styleUrls: ['./play.component.scss'],
 })
 export class PlayComponent implements OnInit {
-  public page: string;  // TODO: use or remove this variable?
+  public page: string; // TODO: use or remove this variable?
 
   public activeSession: ActiveSession;
 
@@ -23,6 +23,47 @@ export class PlayComponent implements OnInit {
   ngOnInit(): void {
     this.winnerTeam = '';
     this.noActivePlayer = true;
+
+    // TODO: refactor (the below stuff is just for debugging)
+    this.activeSession = {
+      name: 'Test Session',
+      creator: 'Spark Fountain',
+      horizontal: 5,
+      vertical: 5,
+      theme: 'mixed',
+      teams: [
+        {
+          name: 'Rot',
+          active: true,
+          color: 'ff0000',
+          players: [],
+          remainingCards: 7,
+        },
+        {
+          name: 'Blau',
+          active: true,
+          color: '0000ff',
+          players: [],
+          remainingCards: 8,
+        },
+      ],
+      cards: [
+        {
+          x: 0,
+          y: 0,
+          word: 'Freude',
+          color: 'ff0000',
+          uncovered: true
+        }
+      ],
+      started: true,
+      description: {
+        term: 'Ablauf',
+        amount: 3,
+        accepted: false,
+        denied: false,
+      },
+    };
   }
 
   fetchActiveSession(): void {

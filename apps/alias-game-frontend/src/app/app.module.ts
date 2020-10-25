@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 import { AliasGameModule } from '@spark-fountain/alias-game';
+import { SocketIoModule } from 'ngx-socket-io';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,6 +18,10 @@ import { AliasGameModule } from '@spark-fountain/alias-game';
     HttpClientModule,
     AliasGameModule,
     // ColorPickerModule  // TODO: decide if use or delete
+    SocketIoModule.forRoot({
+      url: 'http://localhost:3333/api',
+      options: {},
+    }),
   ],
   providers: [HttpClient],
   bootstrap: [AppComponent],
