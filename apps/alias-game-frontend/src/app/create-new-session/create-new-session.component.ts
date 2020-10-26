@@ -55,18 +55,18 @@ export class CreateNewSessionComponent implements OnInit {
         name: 'Ü 18',
         file: 'over-18',
       },
-      // {
-      //   name: 'Party',
-      //   file: 'party'
-      // },
-      // {
-      //   name: 'Jazzchor',
-      //   file: 'jazzchor'
-      // }
-      // {
-      //   name: 'Corona',
-      //   file: 'corona'
-      // }
+      {
+        name: 'Party',
+        file: 'party',
+      },
+      {
+        name: 'Jazzchor',
+        file: 'jazzchor',
+      },
+      {
+        name: 'Corona',
+        file: 'corona',
+      },
     ];
     this.selectedTheme = this.themes[0].name;
 
@@ -117,11 +117,7 @@ export class CreateNewSessionComponent implements OnInit {
     body.set('teamTwoColor', this.session.teamTwoColor);
 
     this.http
-      .post(
-        `/api/create-session`,
-        body.toString(),
-        environment.formHeader
-      )
+      .post(`/api/create-session`, body.toString(), environment.formHeader)
       .toPromise()
       .then((response: Response<ActiveSession>) => {
         this.activeSession = response.data;

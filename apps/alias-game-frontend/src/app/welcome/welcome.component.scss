@@ -7,14 +7,4 @@
   position: absolute;
   top: 50%;
   left: calc(50% - 250px);
-
-  button {
-    color: $white;
-    background: $sea;
-    border: 1px solid $sea;
-
-    &:hover {
-      background: darken($sea, 5%);
-    }
-  }
 }

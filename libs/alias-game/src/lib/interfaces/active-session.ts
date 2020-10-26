@@ -6,10 +6,12 @@ export interface ActiveSession {
   creator: string;
   horizontal: number;
   vertical: number;
-  theme: string;
+  themes: string[];
   teams: Team[];
   cards: Card[];
   started: boolean;
+
+  // TODO: that comes to history
   description: {
     term: string;
     amount: number;

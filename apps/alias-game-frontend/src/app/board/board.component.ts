@@ -152,8 +152,8 @@ export class BoardComponent implements OnInit {
       'team',
       this._activeSession.teams.find((team: Team) => team.active).name
     );
-    body.set('description', this._activeSession.description.term);
-    body.set('amount', this._activeSession.description.amount.toString());
+    // body.set('description', this._activeSession.description.term);
+    // body.set('amount', this._activeSession.description.amount.toString());
     body.set('teamA', this.selectedCards.teamA.toString());
     body.set('teamB', this.selectedCards.teamB.toString());
     body.set('neutral', this.selectedCards.neutral.toString());

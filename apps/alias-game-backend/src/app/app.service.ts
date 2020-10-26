@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { ActiveSession, Session } from '@spark-fountain/alias-game';
+import { ActiveSession } from '@spark-fountain/alias-game';
 
 import * as pouch from 'pouchdb';
 import { environment } from '../environments/environment';
@@ -81,7 +81,7 @@ export class AppService {
   }
 
   /**
-   * Check if a user already exists in the database.
+   * Check if a user already exists.
    */
   userExists(user: string) {
     // $sql = "SELECT id FROM `player` WHERE `name`='$user'";
@@ -98,9 +98,42 @@ export class AppService {
   }
 
   /**
-   * Creates a new session in the database.
+   * Creates a new session.
    */
-  createSession(session: Session) {
+  createSession(session: ActiveSession) {
+    const activeTeam: boolean = Math.random() > 0.5;
+    this.createTeam(
+      session.teams[0],
+      activeTeam ? true : false
+    );
+    this.createTeam(
+      session.teams[1],
+      activeTeam ? false : true
+    );
+
+    if (
+      !this.playerInTeam(
+        session.name,
+        session.teamOneName,
+        session.creator
+      )
+    ) {
+      this.createPlayer(
+        session.creator,
+        session.name,
+        session.teamOneName
+      );
+    }
+
+    this.createSessionColors(
+      session.name,
+      session.horizontal,
+      session.vertical,
+      session.teamOneColor,
+      session.teamTwoColor,
+      activeTeam
+    );
+
     // create an array of indexes
     // $sql = "SELECT id FROM `term` WHERE `category`='$theme'";
     // $result = $db->query($sql);
@@ -199,16 +232,16 @@ export class AppService {
   }
 
   /**
-   * Creates a new team in the database.
+   * Creates a new team.
    */
-  createTeam($session, $name, $color, $active) {
+  createTeam(sessionName, team) {
     // $sql = "INSERT INTO `team` (`session`, `name`, `color`, `active`) VALUES ('$session', '$name', '$color', '$active')";
     // $db->query($sql);
     // this.checkForDatabaseError();
   }
 
   /**
-   * Creates a new user in the database.
+   * Creates a new user.
    */
   createPlayer($name, $session, $team) {
     // $active = $active ? 'true' : 'false';

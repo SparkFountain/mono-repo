@@ -1,36 +1,49 @@
 <div class="menu-container">
   <h2>Erstelle eine neue Session</h2>
 
-  <div class="form-group">
-    <label>Wer bist du?</label>
-    <input
-      [(ngModel)]="session.creator"
-      type="text"
-      maxlength="16"
-      placeholder="Mr(s). Anonymous"
-    />
-  </div>
-  <div class="form-group">
-    <label>Gib einen Session-Namen ein</label>
-    <input
-      [(ngModel)]="session.name"
-      type="text"
-      maxlength="16"
-      placeholder="Friday Fun"
-    />
-  </div>
-  <div class="form-group">
-    <label>Größe des Spielfelds</label>
-    <select [(ngModel)]="selectedBoardSize">
-      <option *ngFor="let size of boardSizes">{{ size }}</option>
-    </select>
-  </div>
-  <div class="form-group">
-    <label>Wähle mindestens ein Thema</label>
-    <select [(ngModel)]="selectedTheme">
-      <option *ngFor="let theme of themes">{{ theme.name }}</option>
-    </select>
-  </div>
+  <p>
+    <mat-form-field appearance="standard">
+      <mat-label>Wer bist du?</mat-label>
+      <input
+        matInput
+        [(ngModel)]="session.creator"
+        type="text"
+        maxlength="16"
+        placeholder="Mr(s). Anonymous"
+      />
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="standard">
+      <mat-label>Gib einen Session-Namen ein</mat-label>
+      <input
+        matInput
+        [(ngModel)]="session.name"
+        type="text"
+        maxlength="16"
+        placeholder="Friday Fun"
+      />
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    </mat-form-field>
+  </p>
+  <mat-form-field appearance="fill">
+    <mat-label>Größe des Spielfelds</mat-label>
+    <mat-select [(ngModel)]="selectedBoardSize">
+      <mat-option *ngFor="let size of boardSizes" [value]="size">
+        {{ size }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Wähle mindestens ein Thema</mat-label>
+    <mat-select [formControl]="selectedTheme" multiple>
+      <mat-option *ngFor="let theme of themes" [value]="theme">{{
+        theme.name
+      }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
   <div class="form-group">
     <label>Name des 1. Teams</label>
     <input
@@ -40,10 +53,11 @@
       placeholder="A"
     />
   </div>
-  <!-- <div class="form-group">
+  <div class="form-group">
     <label>Farbe des 1. Teams</label>
-    <input class="color-picker" [(colorPicker)]="session.teamOneColor" [style.background]="session.teamOneColor" />
-  </div> -->
+    <input class="color-picker" [style.background]="session.teamOneColor" />
+    <!-- [(colorPicker)]="session.teamOneColor" -->
+  </div>
   <div class="form-group">
     <label>Name des 2. Teams</label>
     <input
@@ -54,10 +68,11 @@
     />
   </div>
   <br />
-  <!-- <div class="form-group">
+  <div class="form-group">
     <label>Farbe des 2. Teams</label>
-    <input class="color-picker" [(colorPicker)]="session.teamTwoColor" [style.background]="session.teamTwoColor" />
-  </div> -->
+    <input class="color-picker" [style.background]="session.teamTwoColor" />
+    <!-- [(colorPicker)]="session.teamTwoColor" -->
+  </div>
   <div class="form-group">
     <button (click)="createSession()">Spiel erstellen</button>
     <button [routerLink]="'/willkommen'">Abbrechen</button>

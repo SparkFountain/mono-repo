@@ -1,3 +1,5 @@
+
+// TODO: remove this interface
 export interface Session {
   creator: string;
   name: string;

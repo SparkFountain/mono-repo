@@ -32,10 +32,10 @@ export class CodeSheetComponent implements OnInit {
     });
 
     if (this.activeTeam !== this.user.team) {
-      if (this._activeSession.description.term !== '') {
-        this.term = this._activeSession.description.term;
-        this.amount = this._activeSession.description.amount;
-      }
+      // if (this._activeSession.description.term !== '') {
+      //   this.term = this._activeSession.description.term;
+      //   this.amount = this._activeSession.description.amount;
+      // }
     }
   }
 

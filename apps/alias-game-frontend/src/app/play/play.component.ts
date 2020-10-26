@@ -30,7 +30,7 @@ export class PlayComponent implements OnInit {
       creator: 'Spark Fountain',
       horizontal: 5,
       vertical: 5,
-      theme: 'mixed',
+      themes: ['mixed'],
       teams: [
         {
           name: 'Rot',
@@ -53,8 +53,8 @@ export class PlayComponent implements OnInit {
           y: 0,
           word: 'Freude',
           color: 'ff0000',
-          uncovered: true
-        }
+          uncovered: true,
+        },
       ],
       started: true,
       description: {

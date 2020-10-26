@@ -1,40 +1,57 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$alias-game-frontend-primary: mat-palette($mat-teal, 500);
+$alias-game-frontend-accent: mat-palette($mat-yellow, A700);
+
+// The warn palette is optional (defaults to red).
+$alias-game-frontend-warn: mat-palette($mat-orange, 700);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$alias-game-frontend-theme: mat-light-theme(
+  (
+    color: (
+      primary: $alias-game-frontend-primary,
+      accent: $alias-game-frontend-accent,
+      warn: $alias-game-frontend-warn,
+    ),
+  )
+);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($alias-game-frontend-theme);
+
 @import './variables.scss';
+
+html,
+body {
+  height: 100%;
+}
 
 body {
   background: url(assets/background.jpg);
   background-size: cover;
-  font-family: 'Baloo Bhaina 2', cursive;
+  // font-family: 'Baloo Bhaina 2', cursive;
+
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 
-h1 {
+h1, h2 {
   text-align: center;
-  font-family: 'Indie Flower', cursive;
-  font-size: 80px;
-  margin: 20px 0;
-  text-shadow: 0 0 10px $sea;
-  color: $black;
-}
-
-b {
-  font-family: 'Baloo Bhaina 2', cursive;
-}
-
-button {
-  font-family: 'Baloo Bhaina 2', cursive;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 18px;
-  padding: 8px 20px;
-  box-shadow: 0 0 5px $black;
-  border: none;
-
-  &:hover {
-    background: darken($white, 5%);
-  }
-
-  &:disabled {
-    cursor: not-allowed;
-  }
 }
 
 .form-group {
@@ -103,54 +120,54 @@ button {
   background: $blur;
   box-shadow: $dark-shadow;
 
-  h2 {
-    text-align: center;
-  }
+  // h2 {
+  //   text-align: center;
+  // }
 
   .form-group {
     margin: 10px 50px;
   }
 
-  table {
-    table-layout: fixed;
-    width: calc(100% - 100px);
-    margin: 0 50px;
-    box-sizing: border-box;
-    border-collapse: collapse;
+  // table {
+  //   table-layout: fixed;
+  //   width: calc(100% - 100px);
+  //   margin: 0 50px;
+  //   box-sizing: border-box;
+  //   border-collapse: collapse;
 
-    thead {
-      font-weight: bold;
-    }
+  //   thead {
+  //     font-weight: bold;
+  //   }
 
-    tbody {
-      tr {
-        cursor: pointer;
+  //   tbody {
+  //     tr {
+  //       cursor: pointer;
 
-        &.active {
-          background: $active;
-          color: lighten($white, 10%) !important;
-        }
+  //       &.active {
+  //         background: $active;
+  //         color: lighten($white, 10%) !important;
+  //       }
 
-        &:hover {
-          background: $sea;
-          color: lighten($white, 10%);
+  //       &:hover {
+  //         background: $sea;
+  //         color: lighten($white, 10%);
 
-          &.active {
-            background: darken($active, 10%);
-            color: lighten($white, 10%) !important;
-          }
-        }
-      }
-    }
+  //         &.active {
+  //           background: darken($active, 10%);
+  //           color: lighten($white, 10%) !important;
+  //         }
+  //       }
+  //     }
+  //   }
 
-    td {
-      padding: 5px 15px;
-    }
-  }
+  //   td {
+  //     padding: 5px 15px;
+  //   }
+  // }
 
-  table,
-  th,
-  td {
-    border: 1px solid $black;
-  }
+  // table,
+  // th,
+  // td {
+  //   border: 1px solid $black;
+  // }
 }

@@ -14,45 +14,8 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Post('create-session')
-  createSession(@Body() session: Session): Response<Session> {
+  createSession(@Body() session: ActiveSession): Response<ActiveSession> {
     this.appService.createSession(session);
-
-    const activeTeam: boolean = Math.random() > 0.5;
-    this.appService.createTeam(
-      session.name,
-      session.teamOneName,
-      session.teamOneColor,
-      activeTeam ? true : false
-    );
-    this.appService.createTeam(
-      session.name,
-      session.teamTwoName,
-      session.teamTwoColor,
-      activeTeam ? false : true
-    );
-
-    if (
-      !this.appService.playerInTeam(
-        session.name,
-        session.teamOneName,
-        session.creator
-      )
-    ) {
-      this.appService.createPlayer(
-        session.creator,
-        session.name,
-        session.teamOneName
-      );
-    }
-
-    this.appService.createSessionColors(
-      session.name,
-      session.horizontal,
-      session.vertical,
-      session.teamOneColor,
-      session.teamTwoColor,
-      activeTeam
-    );
 
     // $session = this.appService.getSession(session.name);
     // $teams = this.appService.getSessionTeams(session.name);
