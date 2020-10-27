@@ -1,7 +1,7 @@
 import { Team } from './team';
 import { Card } from './card';
 
-export interface ActiveSession {
+export interface Session {
   name: string;
   creator: string;
   horizontal: number;

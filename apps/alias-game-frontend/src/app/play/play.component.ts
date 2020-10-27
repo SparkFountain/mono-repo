@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActiveSession } from '@spark-fountain/alias-game';
+import { Session } from '@spark-fountain/alias-game';
 
 @Component({
   selector: 'spark-fountain-play',
@@ -9,7 +9,7 @@ import { ActiveSession } from '@spark-fountain/alias-game';
 export class PlayComponent implements OnInit {
   public page: string; // TODO: use or remove this variable?
 
-  public activeSession: ActiveSession;
+  public activeSession: Session;
 
   public participant: string;
 

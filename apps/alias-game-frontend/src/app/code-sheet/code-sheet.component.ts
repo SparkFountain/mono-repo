@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import {
-  ActiveSession,
+  Session,
   Card,
   Player,
   Team,
@@ -16,9 +16,9 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./code-sheet.component.scss'],
 })
 export class CodeSheetComponent implements OnInit {
-  _activeSession: ActiveSession;
+  _activeSession: Session;
   @Input('activeSession')
-  set activeSession(session: ActiveSession) {
+  set activeSession(session: Session) {
     this._activeSession = session;
     this.activeTeam = this._activeSession.teams.find(
       (team: Team) => team.active

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {
-  ActiveSession,
+  Session,
   JoinSession,
   Player,
   Team,
@@ -27,7 +27,7 @@ export class JoinSessionComponent implements OnInit {
   public selectedTeam2Join: string;
   public teamMembers: string;
 
-  public activeSession: ActiveSession;
+  public activeSession: Session;
 
   public user: User;
 
@@ -105,7 +105,7 @@ export class JoinSessionComponent implements OnInit {
         environment.formHeader
       )
       .toPromise()
-      .then((response: Response<ActiveSession>) => {
+      .then((response: Response<Session>) => {
         this.activeSession = response.data;
         console.info('Active Session:', this.activeSession);
 

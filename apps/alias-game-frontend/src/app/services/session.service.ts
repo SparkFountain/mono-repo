@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
-  ActiveSession,
+  Session,
   Response,
   TickerMessage,
 } from '@spark-fountain/alias-game';
@@ -26,9 +26,9 @@ export class SessionService {
   // }
 
   // TODO: completely refactor (use websocket broadcasting)
-  fetchActiveSession(sessionName: string): Promise<Response<ActiveSession>> {
+  fetchActiveSession(sessionName: string): Promise<Response<Session>> {
     return this.http
-      .get<Response<ActiveSession>>(`/api/fetch-session?session=${sessionName}`)
+      .get<Response<Session>>(`/api/fetch-session?session=${sessionName}`)
       .toPromise();
   }
 }

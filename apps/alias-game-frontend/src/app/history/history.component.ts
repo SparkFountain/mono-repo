@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import {
-  ActiveSession,
+  Session,
   HistoryEvent,
   Response,
 } from '@spark-fountain/alias-game';
@@ -13,9 +13,9 @@ import { environment } from '../../environments/environment';
   styleUrls: ['./history.component.scss'],
 })
 export class HistoryComponent implements OnInit {
-  _activeSession: ActiveSession;
+  _activeSession: Session;
   @Input('activeSession')
-  set activeSession(session: ActiveSession) {
+  set activeSession(session: Session) {
     this._activeSession = session;
   }
 

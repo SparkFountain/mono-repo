@@ -8,6 +8,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import {
+  MAT_COLOR_FORMATS,
+  NgxMatColorPickerModule,
+  NGX_MAT_COLOR_FORMATS,
+} from '@angular-material-components/color-picker';
 
 @NgModule({
   declarations: [CreateNewSessionComponent],
@@ -20,6 +27,10 @@ import { MatSelectModule } from '@angular/material/select';
     MatIconModule,
     MatInputModule,
     MatSelectModule,
+    MatButtonModule,
+    NgxMatColorPickerModule,
+    MatCardModule,
   ],
+  providers: [{ provide: MAT_COLOR_FORMATS, useValue: NGX_MAT_COLOR_FORMATS }],
 })
 export class CreateNewSessionModule {}

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
-import { ActiveSession, Card, Team, User } from '@spark-fountain/alias-game';
+import { Session, Card, Team, User } from '@spark-fountain/alias-game';
 import { environment } from '../../environments/environment';
 import { UserService } from '../services/user.service';
 
@@ -10,9 +10,9 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./board.component.scss'],
 })
 export class BoardComponent implements OnInit {
-  _activeSession: ActiveSession;
+  _activeSession: Session;
   @Input('activeSession')
-  set activeSession(session: ActiveSession) {
+  set activeSession(session: Session) {
     this._activeSession = session;
     this.prepareCards();
   }

@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ActiveSession, Player, Team, User } from '@spark-fountain/alias-game';
+import { Session, Player, Team, User } from '@spark-fountain/alias-game';
 import { UserService } from '../services/user.service';
 import { environment } from '../../environments/environment';
 
@@ -10,9 +10,9 @@ import { environment } from '../../environments/environment';
   styleUrls: ['./players.component.scss'],
 })
 export class PlayersComponent implements OnInit {
-  _activeSession: ActiveSession;
+  _activeSession: Session;
   @Input('activeSession')
-  set activeSession(session: ActiveSession) {
+  set activeSession(session: Session) {
     this._activeSession = session;
     this.activeTeam = this._activeSession.teams.find(
       (team: Team) => team.active

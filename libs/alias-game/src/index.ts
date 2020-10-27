@@ -7,7 +7,6 @@ export * from './lib/interfaces/join-session';
 export * from './lib/interfaces/player';
 export * from './lib/interfaces/response';
 export * from './lib/interfaces/rgb';
-export * from './lib/interfaces/session';
 export * from './lib/interfaces/team';
 export * from './lib/interfaces/term';
 export * from './lib/interfaces/theme';
