@@ -1,5 +1,5 @@
 export * from './lib/alias-game.module';
-export * from './lib/interfaces/active-session';
+export * from './lib/interfaces/session';
 export * from './lib/interfaces/card';
 export * from './lib/interfaces/color';
 export * from './lib/interfaces/history-event';

@@ -8,11 +8,11 @@ export interface Session {
   vertical: number;
   themes: string[];
   teams: Team[];
-  cards: Card[];
-  started: boolean;
+  cards?: Card[];
+  started?: boolean;
 
   // TODO: that comes to history
-  description: {
+  description?: {
     term: string;
     amount: number;
     accepted: boolean;

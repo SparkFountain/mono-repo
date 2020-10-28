@@ -1,67 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { ActiveSession } from '@spark-fountain/alias-game';
-
-import * as pouch from 'pouchdb';
-import { environment } from '../environments/environment';
-const PouchDB: PouchDB.Static = (pouch as any).default;
+import { Session, Team } from '@spark-fountain/alias-game';
 
 @Injectable()
 export class AppService {
-  private db: any;
-
-  sessions: ActiveSession[];
-
-  constructor() {
-    this.db = new PouchDB(environment.database.url, {
-      auth: {
-        username: environment.database.username,
-        password: environment.database.password,
-      },
-    });
-  }
-
-  async get(id: string): Promise<any> {
-    return this.db
-      .get(id)
-      .then(({ _id, _rev, ...doc }: any) => doc)
-      .catch((err: Error) => {
-        console.error(err);
-        return null;
-      });
-  }
-
-  async getAll(): Promise<any> {
-    return this.db
-      .allDocs({ include_docs: true })
-      .then((docs: any) => {
-        console.info('[ALL DOCS]', docs);
-        // TODO: remove _id and _rev
-        return docs.rows.map((doc: any) => doc.doc);
-      })
-      .catch((err: Error) => {
-        console.error(err);
-        return null;
-      });
-  }
-
-  async countAll(): Promise<number> {
-    return this.db.allDocs().then((docs: any) => docs.total_rows);
-  }
-
-  async put(doc: any): Promise<any> {
-    return this.db
-      .put(doc)
-      .then((response: any) => {
-        console.info('[PUT]', response);
-      })
-      .catch((err: Error) => {
-        console.error(err);
-        return null;
-      });
-  }
+  sessions: Session[];
 
   /**
-   * Shuffles array in place. ES6 version
+   * Shuffles array in place.
    */
   shuffle(array: unknown[]) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -72,172 +17,111 @@ export class AppService {
   }
 
   /**
-   * Checks if a database error occurred.
-   */
-  checkForDatabaseError() {
-    // if ($db->error) {
-    //   echo json_encode(array('status' => STATUS_FAIL, 'data' => $db->error));
-    // }
-  }
-
-  /**
    * Check if a user already exists.
    */
   userExists(user: string) {
     // $sql = "SELECT id FROM `player` WHERE `name`='$user'";
     // $result = $db->query($sql);
-    // this.checkForDatabaseError();
     // return $result->num_rows > 0;
   }
 
   playerInTeam($session, $team, $player): any {
     // $sql = "SELECT id FROM `player` WHERE `session`='$session' AND `team`='$team' AND `name`='$player'";
     // $result = $db->query($sql);
-    // this.checkForDatabaseError();
     // return $result->num_rows > 0;
   }
 
   /**
    * Creates a new session.
    */
-  createSession(session: ActiveSession) {
+  createSession(session: Session) {
     const activeTeam: boolean = Math.random() > 0.5;
-    this.createTeam(
-      session.teams[0],
-      activeTeam ? true : false
-    );
-    this.createTeam(
-      session.teams[1],
-      activeTeam ? false : true
-    );
 
-    if (
-      !this.playerInTeam(
-        session.name,
-        session.teamOneName,
-        session.creator
-      )
-    ) {
-      this.createPlayer(
-        session.creator,
-        session.name,
-        session.teamOneName
-      );
-    }
+    session.teams[0].active = activeTeam ? true : false;
+    session.teams[1].active = activeTeam ? false : true;
 
-    this.createSessionColors(
-      session.name,
-      session.horizontal,
-      session.vertical,
-      session.teamOneColor,
-      session.teamTwoColor,
-      activeTeam
-    );
-
-    // create an array of indexes
-    // $sql = "SELECT id FROM `term` WHERE `category`='$theme'";
-    // $result = $db->query($sql);
-    // this.checkForDatabaseError();
-    // $indexes = array();
-    // while($row = $result->fetch_assoc()) {
-    //   array_push($indexes, $row['id']);
+    // TODO: refactor or remove
+    // if (
+    //   !this.playerInTeam(session.name, session.teams[0].name, session.creator)
+    // ) {
+    //   this.createPlayer(session.creator, session.name, session.teams[0].name);
     // }
-    // this.shuffle($indexes);
-    // $sql = "INSERT INTO `session` (`creator`, `name`, `horizontal`, `vertical`, `theme`, `terms`) VALUES ('$creator', '$name', $horizontal, $vertical, '$theme', '" . json_encode($indexes) . "')";
-    // $db->query($sql);
-    // this.checkForDatabaseError();
+
+    this.createSessionColors(session);
+
+    this.sessions.push(session);
   }
 
   /**
    * Creates random colors for a session.
    */
-  createSessionColors(
-    $session,
-    $horizontal,
-    $vertical,
-    $teamAColor,
-    $teamBColor,
-    $activeTeam
-  ) {
-    // switch ($horizontal * $vertical) {
-    //   case 9:
-    //     $teamA = $activeTeam ? 4 : 3;
-    //     $teamB = 7 - $teamA;
-    //     $neutral = 1;
-    //     $black = 1;
-    //     break;
-    //   case 12:
-    //     $teamA = $activeTeam ? 5 : 4;
-    //     $teamB = 9 - $teamA;
-    //     $neutral = 2;
-    //     $black = 1;
-    //     break;
-    //   case 16:
-    //     $teamA = $activeTeam ? 6 : 5;
-    //     $teamB = 11 - $teamA;
-    //     $neutral = 4;
-    //     $black = 1;
-    //     break;
-    //   case 20:
-    //     $teamA = $activeTeam ? 7 : 6;
-    //     $teamB = 13 - $teamA;
-    //     $neutral = 6;
-    //     $black = 1;
-    //     break;
-    //   case 25:
-    //     $teamA = $activeTeam ? 9 : 8;
-    //     $teamB = 17 -  $teamA;
-    //     $neutral = 7;
-    //     $black = 1;
-    //     break;
-    //   case 30:
-    //     $teamA = $activeTeam ? 10 : 9;
-    //     $teamB = 19 - $teamA;
-    //     $neutral = 9;
-    //     $black = 2;
-    //     break;
-    //   case 36:
-    //     $teamA = $activeTeam ? 12 : 11;
-    //     $teamB = 23 - $teamA;
-    //     $neutral = 10;
-    //     $black = 3;
-    //     break;
-    // }
-    // $colors = array();
-    // for ($i = 0; $i < $teamA; $i++) {
-    //   array_push($colors, $teamAColor);
-    // }
-    // for ($i = 0; $i < $teamB; $i++) {
-    //   array_push($colors, $teamBColor);
-    // }
-    // for ($i = 0; $i < $neutral; $i++) {
-    //   array_push($colors, '#ffcc06');
-    // }
-    // for ($i = 0; $i < $black; $i++) {
-    //   array_push($colors, '#222222');
-    // }
-    // this.shuffle($colors);
-    // $sessionColorsSql = "INSERT INTO `session-colors` (`session`, `x`, `y`, `color`) VALUES ";
-    // for($y = 0; $y < $vertical; $y++) {
-    //   for($x = 0; $x < $horizontal; $x++) {
-    //     $currentColor = $colors[$y*$horizontal + $x];
-    //     $sessionColorsSql .= "('$session', $x, $y, '$currentColor')";
-    //     if(($x+1) * ($y+1) < ($horizontal*$vertical)-1) {
-    //       $sessionColorsSql .= ", ";
-    //     }
-    //   }
-    // }
-    // $db->query($sessionColorsSql);
-    // this.checkForDatabaseError();
-  }
+  createSessionColors(session: Session) {
+    let teamA: number;
+    let teamB: number;
+    let neutral: number;
+    let black: number;
+    const activeTeam: boolean = session.teams[0].active;
 
-  /**
-   * Creates a new team.
-   */
-  createTeam(sessionName, team) {
-    // $sql = "INSERT INTO `team` (`session`, `name`, `color`, `active`) VALUES ('$session', '$name', '$color', '$active')";
-    // $db->query($sql);
-    // this.checkForDatabaseError();
+    switch (session.horizontal * session.vertical) {
+      case 9:
+        teamA = activeTeam ? 4 : 3;
+        teamB = 7 - teamA;
+        neutral = 1;
+        black = 1;
+        break;
+      case 12:
+        teamA = activeTeam ? 5 : 4;
+        teamB = 9 - teamA;
+        neutral = 2;
+        black = 1;
+        break;
+      case 16:
+        teamA = activeTeam ? 6 : 5;
+        teamB = 11 - teamA;
+        neutral = 4;
+        black = 1;
+        break;
+      case 20:
+        teamA = activeTeam ? 7 : 6;
+        teamB = 13 - teamA;
+        neutral = 6;
+        black = 1;
+        break;
+      case 25:
+        teamA = activeTeam ? 9 : 8;
+        teamB = 17 - teamA;
+        neutral = 7;
+        black = 1;
+        break;
+      case 30:
+        teamA = activeTeam ? 10 : 9;
+        teamB = 19 - teamA;
+        neutral = 9;
+        black = 2;
+        break;
+      case 36:
+        teamA = activeTeam ? 12 : 11;
+        teamB = 23 - teamA;
+        neutral = 10;
+        black = 3;
+        break;
+    }
+
+    let colors = [];
+    for (let i = 0; i < teamA; i++) {
+      colors.push(session.teams[0].color);
+    }
+    for (let i = 0; i < teamB; i++) {
+      colors.push(session.teams[1].color);
+    }
+    for (let i = 0; i < neutral; i++) {
+      colors.push('#ffcc06');
+    }
+    for (let i = 0; i < black; i++) {
+      colors.push('#222222');
+    }
+
+    colors = this.shuffle(colors);
   }
 
   /**
@@ -247,7 +131,6 @@ export class AppService {
     // $active = $active ? 'true' : 'false';
     // $sql = "INSERT INTO `player` (`name`, `session`, `team`) VALUES ('$name', '$session', '$team')";
     // $db->query($sql);
-    // this.checkForDatabaseError();
   }
 
   /**
@@ -256,7 +139,6 @@ export class AppService {
   getTeamPlayers($session, $team) {
     // $sql = "SELECT `name`, `active`, `selectedX`, `selectedY` FROM `player` WHERE `session` = '$session' AND `team` = '$team'";
     // $result = $db->query($sql);
-    // this.checkForDatabaseError();
     // $players = array();
     // while($row = $result->fetch_assoc()) {
     //   array_push($players, array(
@@ -275,7 +157,6 @@ export class AppService {
   getAllSessions() {
     // $sql = 'SELECT `name`, `creator` FROM `session`';
     // $result = $db->query($sql);
-    // this.checkForDatabaseError();
     // $sessions = array();
     // while($row = $result->fetch_assoc()) {
     //   array_push($sessions, array(
@@ -292,7 +173,6 @@ export class AppService {
   getSession($session) {
     // $sql = "SELECT `name`, `creator`, `horizontal`, `vertical`, `theme`, `started` FROM `session` WHERE `name` = '$session'";
     // $result = $db->query($sql);
-    // this.checkForDatabaseError();
     // while($row = $result->fetch_assoc()) {
     //   $sessions = array(
     //     'name' => $row['name'],
@@ -312,7 +192,6 @@ export class AppService {
   getSessionTeams($session) {
     // $sql = "SELECT `name`, `color`, `active` FROM `team` WHERE `session` = '$session'";
     // $result = $db->query($sql);
-    // this.checkForDatabaseError();
     // $teams = array();
     // while($row = $result->fetch_assoc()) {
     //   array_push($teams, array(
@@ -330,7 +209,6 @@ export class AppService {
   getSessionColors($session) {
     // $sql = "SELECT `x`, `y`, `color`, `uncovered` FROM `session-colors` WHERE `session` = '$session' ORDER BY y ASC, x ASC";
     // $result = $db->query($sql);
-    // this.checkForDatabaseError();
     // $colors = array();
     // while($row = $result->fetch_assoc()) {
     //   array_push($colors, array(
@@ -349,7 +227,6 @@ export class AppService {
   getSessionCards($session) {
     // $sql = "SELECT `horizontal`, `vertical`, `terms` FROM `session` WHERE `name`='$session'";
     // $result = $db->query($sql);
-    // this.checkForDatabaseError();
     // while($row = $result->fetch_assoc()) {
     //   $horizontal = $row['horizontal'];
     //   $vertical = $row['vertical'];
@@ -358,15 +235,14 @@ export class AppService {
     // $colors = getSessionColors($session);
     // $cardAmount = $horizontal * $vertical;
     // $sql = "SELECT `id`, `word` FROM `term` WHERE `id` IN (";
-    // for ($i=0; $i<$cardAmount; $i++) {
-    //   $sql .= $termIndexes[$i];
-    //   if($i<$cardAmount-1) {
+    // for (i=0; i<$cardAmount; i++) {
+    //   $sql .= $termIndexes[i];
+    //   if(i<$cardAmount-1) {
     //     $sql .= ',';
     //   }
     // }
     // $sql .= ')';
     // $result = $db->query($sql);
-    // this.checkForDatabaseError();
     // $terms = array();
     // while($row = $result->fetch_assoc()) {
     //   $terms[$row['id']] = $row['word'];
@@ -390,19 +266,16 @@ export class AppService {
   selectCard($session, $x, $y) {
     // $sql = "UPDATE `session-colors` SET `uncovered`=1 WHERE `session`='$session' AND `x`='$x' AND `y`='$y'";
     // $db->query($sql);
-    // this.checkForDatabaseError();
   }
 
   requestDescription($session, $team, $word, $amount) {
     // $sql = "INSERT INTO `description` (`session`, `team`, `word`, `amount`, `accepted`) VALUES ('$session', '$team', '$word', $amount, -1)";
     // $db->query($sql);
-    // this.checkForDatabaseError();
   }
 
   getDescription($session) {
     // $sql = "SELECT `word`, `amount`, `accepted` FROM `description` WHERE `session`='$session' ORDER BY `id` DESC LIMIT 1";
     // $result = $db->query($sql);
-    // this.checkForDatabaseError();
     // if($result->num_rows > 0) {
     //   while($row = $result->fetch_assoc()) {
     //     return array(
@@ -423,19 +296,16 @@ export class AppService {
   acceptDescription($session) {
     // $sql = "UPDATE `description` SET `accepted`=1 WHERE `session`='$session'";
     // $result = $db->query($sql);
-    // this.checkForDatabaseError();
   }
 
   denyDescription($session) {
     // $sql = "UPDATE `description` SET `accepted`=0 WHERE `session`='$session'";
     // $result = $db->query($sql);
-    // this.checkForDatabaseError();
   }
 
   fetchTerms($session) {
     // $sql = "SELECT `id`, `word`, `amount` FROM `term` WHERE `session` = '$session' ORDER BY `id` ASC";
     // $result = $db->query($sql);
-    // this.checkForDatabaseError();
     // $terms = array();
     // while($row = $result->fetch_assoc()) {
     //   array_push($terms, array(
@@ -450,7 +320,6 @@ export class AppService {
   exchangeTerm($session, $x, $y) {
     // $sql = "SELECT `horizontal`, `vertical`, `terms` FROM `session` WHERE `name` = '$session'";
     // $result = $db->query($sql);
-    // this.checkForDatabaseError();
     // while($row = $result->fetch_assoc()) {
     //   $horizontal = $row['horizontal'];
     //   $vertical = $row['vertical'];
@@ -463,13 +332,11 @@ export class AppService {
     // $terms = array_values($terms);
     // $sql = "UPDATE `session` SET `terms`='".json_encode($terms)."' WHERE `name`='$session'";
     // $db->query($sql);
-    // this.checkForDatabaseError();
   }
 
   fetchHistory($session) {
     // $sql = "SELECT `team`, `description`, `amount`, `teamA`, `teamB`, `neutral`, `black` FROM `history` WHERE `session` = '$session'";
     // $result = $db->query($sql);
-    // this.checkForDatabaseError();
     // $history = array();
     // while($row = $result->fetch_assoc()) {
     //   array_push($history, array(
@@ -490,14 +357,13 @@ export class AppService {
     $team,
     $description,
     $amount,
-    $teamA,
-    $teamB,
-    $neutral,
-    $black
+    teamA,
+    teamB,
+    neutral,
+    black
   ) {
-    // $sql = "INSERT INTO `history` (`session`, `team`, `description`, `amount`, `teamA`, `teamB`, `neutral`, `black`) VALUES ('$session', '$team', '$description', $amount, $teamA, $teamB, $neutral, $black)";
+    // $sql = "INSERT INTO `history` (`session`, `team`, `description`, `amount`, `teamA`, `teamB`, `neutral`, `black`) VALUES ('$session', '$team', '$description', $amount, teamA, teamB, neutral, black)";
     // $db->query($sql);
-    // this.checkForDatabaseError();
   }
 
   fetchSession($sessionName) {
@@ -548,20 +414,17 @@ export class AppService {
   startSession($session) {
     // $sql = "UPDATE `session` SET `started`=1 WHERE `name`='$session'";
     // $db->query($sql);
-    // this.checkForDatabaseError();
   }
 
   requestActivePlayer($session, $team, $player) {
     // $sql = "UPDATE `player` SET `active`=1 WHERE `session`='$session' AND `team`='$team' AND `name`='$player'";
     // $db->query($sql);
-    // this.checkForDatabaseError();
   }
 
   resetSession($session) {
     // // check if any player already reset the session
     // $sql = "SELECT `id` FROM `player` WHERE `session`='$session' AND `active`=1";
     // $result = $db->query($sql);
-    // this.checkForDatabaseError();
     // if($result->num_rows === 2) {
     //   // replace terms and reset started
     //   $sql = "SELECT `horizontal`, `vertical`, `terms` FROM `session` WHERE `name`='$session'";
@@ -572,7 +435,7 @@ export class AppService {
     //     $horizontal = $row['horizontal'];
     //     $vertical = $row['vertical'];
     //   }
-    //   for($i=0; $i<$horizontal*$vertical; $i++) {
+    //   for(i=0; i<$horizontal*$vertical; i++) {
     //     array_shift($terms);
     //   }
     //   $sql = "UPDATE `session` SET `terms`='".json_encode($terms)."', `started`=0 WHERE `name`='$session'";
@@ -598,10 +461,10 @@ export class AppService {
     //   $db->query($sql);
     //   this.checkForDatabaseError();
     //   // now, re-create them
-    //   $activeTeam = rand(0, 1) == 1;
-    //   createTeam($session, $teams[0]['name'], $teams[0]['color'], $activeTeam ? true : false);
-    //   createTeam($session, $teams[1]['name'], $teams[1]['color'], $activeTeam ? false : true);
-    //   createSessionColors($session, $horizontal, $vertical, $teams[0]['color'], $teams[1]['color'], $activeTeam);
+    //   activeTeam = rand(0, 1) == 1;
+    //   createTeam($session, $teams[0]['name'], $teams[0]['color'], activeTeam ? true : false);
+    //   createTeam($session, $teams[1]['name'], $teams[1]['color'], activeTeam ? false : true);
+    //   createSessionColors($session, $horizontal, $vertical, $teams[0]['color'], $teams[1]['color'], activeTeam);
     //   // unset active players
     //   $sql = "UPDATE `player` SET `active`=0 WHERE `session`='$session'";
     //   $db->query($sql);
@@ -612,15 +475,11 @@ export class AppService {
   nextRound($session) {
     // $sql = "DELETE FROM `description` WHERE 1";
     // $db->query($sql);
-    // this.checkForDatabaseError();
     // $sql = "UPDATE `team` SET `active`=-1 WHERE `active`='1' AND `session`='$session'";
     // $db->query($sql);
-    // this.checkForDatabaseError();
     // $sql = "UPDATE `team` SET `active`=1 WHERE `active`=0 AND `session`='$session'";
     // $db->query($sql);
-    // this.checkForDatabaseError();
     // $sql = "UPDATE `team` SET `active`=0 WHERE `active`=-1 AND `session`='$session'";
     // $db->query($sql);
-    // this.checkForDatabaseError();
   }
 }

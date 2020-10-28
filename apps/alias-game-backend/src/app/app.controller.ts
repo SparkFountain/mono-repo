@@ -2,10 +2,9 @@ import { Body, Controller, Get, Post } from '@nestjs/common';
 
 import { AppService } from './app.service';
 import {
-  ActiveSession,
+  Session,
   JoinSession,
   Response,
-  Session,
   User,
 } from '@spark-fountain/alias-game';
 
@@ -14,7 +13,7 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Post('create-session')
-  createSession(@Body() session: ActiveSession): Response<ActiveSession> {
+  createSession(@Body() session: Session): Response<Session> {
     this.appService.createSession(session);
 
     // $session = this.appService.getSession(session.name);
@@ -55,7 +54,7 @@ export class AppController {
   }
 
   @Post()
-  joinSession(@Body() session: ActiveSession): Response<ActiveSession> {
+  joinSession(@Body() session: Session): Response<Session> {
     // TODO: implement
     return null;
   }
