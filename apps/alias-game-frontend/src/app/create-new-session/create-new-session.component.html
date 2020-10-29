@@ -1,111 +1,146 @@
-<mat-card>
-  <h2>Erstelle eine neue Session</h2>
+<div class="card-container">
+  <mat-card>
+    <h2>Erstelle eine neue Session</h2>
 
-  <p>
-    <mat-form-field>
-      <mat-label>Wer bist du?</mat-label>
-      <input
-        matInput
-        [(ngModel)]="session.creator"
-        type="text"
-        maxlength="16"
-        placeholder="Mr(s). Anonymous"
-      />
-      <mat-icon matSuffix>person</mat-icon>
-    </mat-form-field>
-  </p>
-  <p>
-    <mat-form-field appearance="standard">
-      <mat-label>Gib einen Session-Namen ein</mat-label>
-      <input
-        matInput
-        [(ngModel)]="session.name"
-        type="text"
-        maxlength="16"
-        placeholder="Friday Fun"
-      />
-      <mat-icon matSuffix>grid_on</mat-icon>
-    </mat-form-field>
-  </p>
-  <p>
-    <mat-form-field appearance="fill">
-      <mat-label>Größe des Spielfelds</mat-label>
-      <mat-select [(ngModel)]="selectedBoardSize">
-        <mat-option *ngFor="let size of boardSizes" [value]="size">
-          {{ size }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </p>
-  <p>
-    <mat-form-field appearance="fill">
-      <mat-label>Wähle mindestens ein Thema</mat-label>
-      <mat-select [formControl]="selectedTheme" multiple>
-        <mat-option *ngFor="let theme of themes" [value]="theme">{{
-          theme.name
-        }}</mat-option>
-      </mat-select>
-    </mat-form-field>
-  </p>
-  <p>
-    <mat-form-field>
-      <mat-label>Name des 1. Teams</mat-label>
-      <input
-        matInput
-        [(ngModel)]="session.teams[0].name"
-        type="text"
-        maxlength="16"
-        placeholder="A"
-      />
-      <mat-icon matSuffix>people_outline</mat-icon>
-    </mat-form-field>
-  </p>
-  <p>
-    <mat-form-field>
-      <mat-label>Farbe des 1. Teams</mat-label>
-      <input matInput [ngxMatColorPicker]="picker" [formControl]="colorCtr" />
-      <!-- TODO: add variables in component -->
-      <ngx-mat-color-toggle matSuffix [for]="picker"></ngx-mat-color-toggle>
-      <ngx-mat-color-picker
-        #picker
-        [touchUi]="touchUi"
-        [color]="session.teams[0].color"
-      ></ngx-mat-color-picker>
-    </mat-form-field>
-  </p>
-  <p>
-    <mat-form-field>
-      <mat-label>Name des 2. Teams</mat-label>
-      <input
-        matInput
-        [(ngModel)]="session.teams[1].name"
-        type="text"
-        maxlength="16"
-        placeholder="B"
-      />
-      <mat-icon matSuffix>people</mat-icon>
-    </mat-form-field>
-  </p>
-  <p>
-    <mat-form-field>
-      <mat-label>Farbe des 2. Teams</mat-label>
-      <input matInput [ngxMatColorPicker]="picker" [formControl]="colorCtr" />
-      <!-- TODO: add variables in component -->
-      <ngx-mat-color-toggle matSuffix [for]="picker"></ngx-mat-color-toggle>
-      <ngx-mat-color-picker
-        #picker
-        [touchUi]="touchUi"
-        [color]="session.teams[1].color"
-      ></ngx-mat-color-picker>
-    </mat-form-field>
-  </p>
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Wer bist du?</mat-label>
+        <input
+          matInput
+          [formControl]="creator"
+          type="text"
+          maxlength="16"
+          placeholder="Mr(s). Anonymous"
+          required
+        />
+        <mat-icon matSuffix>person</mat-icon>
+        <mat-error *ngIf="creator.invalid">{{
+          getErrorMessage('creator')
+        }}</mat-error>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Wie soll diese Session heißen?</mat-label>
+        <input
+          matInput
+          [formControl]="sessionName"
+          type="text"
+          maxlength="16"
+          placeholder="Friday Fun 2.0"
+          required
+        />
+        <mat-icon matSuffix>grid_on</mat-icon>
+        <mat-error *ngIf="sessionName.invalid">{{
+          getErrorMessage('sessionName')
+        }}</mat-error>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Größe des Spielfelds</mat-label>
+        <mat-select [(ngModel)]="selectedBoardSize">
+          <mat-option *ngFor="let size of boardSizes" [value]="size">
+            {{ size }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Was für Themen sollen die Begriffe haben?</mat-label>
+        <mat-select [formControl]="selectedThemes" multiple>
+          <mat-option *ngFor="let theme of themes" [value]="theme">{{
+            theme.name
+          }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="selectedThemes.invalid">{{
+          getErrorMessage('selectedThemes')
+        }}</mat-error>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Wie heißt das erste Team?</mat-label>
+        <input
+          matInput
+          [formControl]="teams[0].name"
+          type="text"
+          maxlength="16"
+          placeholder="Rot"
+        />
+        <mat-icon matSuffix>people_outline</mat-icon>
+        <mat-error *ngIf="teams[0].name.invalid">{{
+          getErrorMessage('team1Name')
+        }}</mat-error>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Welche Farbe hat das erste Team?</mat-label>
+        <input
+          matInput
+          [formControl]="teams[0].color"
+          [ngxMatColorPicker]="pickerTeam1"
+        />
+        <ngx-mat-color-toggle
+          matSuffix
+          [for]="pickerTeam1"
+        ></ngx-mat-color-toggle>
+        <ngx-mat-color-picker
+          #pickerTeam1
+          color="primary"
+        ></ngx-mat-color-picker>
+        <mat-error *ngIf="teams[0].color.invalid">{{
+          getErrorMessage('team1Color')
+        }}</mat-error>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Und wie heißt das zweite Team?</mat-label>
+        <input
+          matInput
+          [formControl]="teams[1].name"
+          type="text"
+          maxlength="16"
+          placeholder="Blau"
+        />
+        <mat-icon matSuffix>people</mat-icon>
+        <mat-error *ngIf="teams[1].name.invalid">{{
+          getErrorMessage('team2Name')
+        }}</mat-error>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Und welche Farbe hat das zweite Team?</mat-label>
+        <input
+          matInput
+          [formControl]="teams[1].color"
+          [ngxMatColorPicker]="pickerTeam2"
+        />
+        <ngx-mat-color-toggle
+          matSuffix
+          [for]="pickerTeam2"
+        ></ngx-mat-color-toggle>
+        <ngx-mat-color-picker
+          #pickerTeam2
+          color="primary"
+        ></ngx-mat-color-picker>
+        <mat-error *ngIf="teams[1].color.invalid">{{
+          getErrorMessage('team2Color')
+        }}</mat-error>
+      </mat-form-field>
+    </p>
 
-  <div class="form-group">
-    <button mat-raised-button color="primary" (click)="createSession()">
-      Spiel erstellen
-    </button>
-    <button mat-raised-button color="warn" [routerLink]="'/willkommen'">
-      Abbrechen
-    </button>
-  </div>
-</mat-card>
+    <div class="form-group">
+      <button mat-raised-button color="primary" (click)="createSession()">
+        Spiel erstellen
+      </button>
+      <button mat-raised-button color="warn" [routerLink]="'/willkommen'">
+        Abbrechen
+      </button>
+    </div>
+  </mat-card>
+</div>

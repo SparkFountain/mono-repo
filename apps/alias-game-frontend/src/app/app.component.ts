@@ -10,7 +10,7 @@ import { SessionService } from './services/session.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  constructor(private sessionService: SessionService) {
+  constructor(/* private sessionService: SessionService */) {
     this.tickerMessages = [];
   }
 

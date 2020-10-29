@@ -1,12 +1,13 @@
 import { Team } from './team';
 import { Card } from './card';
+import { Theme } from '@spark-fountain/alias-game';
 
 export interface Session {
   name: string;
   creator: string;
   horizontal: number;
   vertical: number;
-  themes: string[];
+  themes: Theme[];
   teams: Team[];
   cards?: Card[];
   started?: boolean;

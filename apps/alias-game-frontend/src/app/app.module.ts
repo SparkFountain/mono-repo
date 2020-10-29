@@ -18,11 +18,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     HttpClientModule,
     AliasGameModule,
-    // ColorPickerModule  // TODO: decide if use or delete
-    SocketIoModule.forRoot({
-      url: 'http://localhost:3333/api',
-      options: {},
-    }),
+    // SocketIoModule.forRoot({
+    //   url: 'http://localhost:3333/api',
+    //   options: {},
+    // }),
     BrowserAnimationsModule,
   ],
   providers: [HttpClient],

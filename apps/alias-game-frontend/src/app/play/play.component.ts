@@ -30,7 +30,7 @@ export class PlayComponent implements OnInit {
       creator: 'Spark Fountain',
       horizontal: 5,
       vertical: 5,
-      themes: ['mixed'],
+      themes: [],
       teams: [
         {
           name: 'Rot',
