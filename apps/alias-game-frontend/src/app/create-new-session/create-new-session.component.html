@@ -2,145 +2,152 @@
   <mat-card>
     <h2>Erstelle eine neue Session</h2>
 
-    <p>
-      <mat-form-field appearance="fill">
-        <mat-label>Wer bist du?</mat-label>
-        <input
-          matInput
-          [formControl]="creator"
-          type="text"
-          maxlength="16"
-          placeholder="Mr(s). Anonymous"
-          required
-        />
-        <mat-icon matSuffix>person</mat-icon>
-        <mat-error *ngIf="creator.invalid">{{
-          getErrorMessage('creator')
-        }}</mat-error>
-      </mat-form-field>
-    </p>
-    <p>
-      <mat-form-field appearance="fill">
-        <mat-label>Wie soll diese Session heißen?</mat-label>
-        <input
-          matInput
-          [formControl]="sessionName"
-          type="text"
-          maxlength="16"
-          placeholder="Friday Fun 2.0"
-          required
-        />
-        <mat-icon matSuffix>grid_on</mat-icon>
-        <mat-error *ngIf="sessionName.invalid">{{
-          getErrorMessage('sessionName')
-        }}</mat-error>
-      </mat-form-field>
-    </p>
-    <p>
-      <mat-form-field appearance="fill">
-        <mat-label>Größe des Spielfelds</mat-label>
-        <mat-select [(ngModel)]="selectedBoardSize">
-          <mat-option *ngFor="let size of boardSizes" [value]="size">
-            {{ size }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </p>
-    <p>
-      <mat-form-field appearance="fill">
-        <mat-label>Was für Themen sollen die Begriffe haben?</mat-label>
-        <mat-select [formControl]="selectedThemes" multiple>
-          <mat-option *ngFor="let theme of themes" [value]="theme">{{
-            theme.name
-          }}</mat-option>
-        </mat-select>
-        <mat-error *ngIf="selectedThemes.invalid">{{
-          getErrorMessage('selectedThemes')
-        }}</mat-error>
-      </mat-form-field>
-    </p>
-    <p>
-      <mat-form-field appearance="fill">
-        <mat-label>Wie heißt das erste Team?</mat-label>
-        <input
-          matInput
-          [formControl]="teams[0].name"
-          type="text"
-          maxlength="16"
-          placeholder="Rot"
-        />
-        <mat-icon matSuffix>people_outline</mat-icon>
-        <mat-error *ngIf="teams[0].name.invalid">{{
-          getErrorMessage('team1Name')
-        }}</mat-error>
-      </mat-form-field>
-    </p>
-    <p>
-      <mat-form-field appearance="fill">
-        <mat-label>Welche Farbe hat das erste Team?</mat-label>
-        <input
-          matInput
-          [formControl]="teams[0].color"
-          [ngxMatColorPicker]="pickerTeam1"
-        />
-        <ngx-mat-color-toggle
-          matSuffix
-          [for]="pickerTeam1"
-        ></ngx-mat-color-toggle>
-        <ngx-mat-color-picker
-          #pickerTeam1
-          color="primary"
-        ></ngx-mat-color-picker>
-        <mat-error *ngIf="teams[0].color.invalid">{{
-          getErrorMessage('team1Color')
-        }}</mat-error>
-      </mat-form-field>
-    </p>
-    <p>
-      <mat-form-field appearance="fill">
-        <mat-label>Und wie heißt das zweite Team?</mat-label>
-        <input
-          matInput
-          [formControl]="teams[1].name"
-          type="text"
-          maxlength="16"
-          placeholder="Blau"
-        />
-        <mat-icon matSuffix>people</mat-icon>
-        <mat-error *ngIf="teams[1].name.invalid">{{
-          getErrorMessage('team2Name')
-        }}</mat-error>
-      </mat-form-field>
-    </p>
-    <p>
-      <mat-form-field appearance="fill">
-        <mat-label>Und welche Farbe hat das zweite Team?</mat-label>
-        <input
-          matInput
-          [formControl]="teams[1].color"
-          [ngxMatColorPicker]="pickerTeam2"
-        />
-        <ngx-mat-color-toggle
-          matSuffix
-          [for]="pickerTeam2"
-        ></ngx-mat-color-toggle>
-        <ngx-mat-color-picker
-          #pickerTeam2
-          color="primary"
-        ></ngx-mat-color-picker>
-        <mat-error *ngIf="teams[1].color.invalid">{{
-          getErrorMessage('team2Color')
-        }}</mat-error>
-      </mat-form-field>
-    </p>
+    <form [formGroup]="sessionForm" (ngSubmit)="onSubmit()">
+      <p>
+        <mat-form-field appearance="fill">
+          <mat-label>Wer bist du?</mat-label>
+          <input
+            matInput
+            formControlName="creator"
+            type="text"
+            maxlength="16"
+            placeholder="Mr(s). Anonymous"
+            required
+          />
+          <mat-icon matSuffix>person</mat-icon>
+          <mat-error *ngIf="sessionForm.get('creator').invalid">{{
+            getErrorMessage('creator')
+          }}</mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="fill">
+          <mat-label>Wie soll diese Session heißen?</mat-label>
+          <input
+            matInput
+            formControlName="sessionName"
+            type="text"
+            maxlength="16"
+            placeholder="Friday Fun 2.0"
+            required
+          />
+          <mat-icon matSuffix>grid_on</mat-icon>
+          <mat-error *ngIf="sessionForm.get('sessionName').invalid">{{
+            getErrorMessage('sessionName')
+          }}</mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="fill">
+          <mat-label>Größe des Spielfelds</mat-label>
+          <mat-select formControlName="selectedBoardSize">
+            <mat-option *ngFor="let size of boardSizes" [value]="size">
+              {{ size }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="fill">
+          <mat-label>Was für Themen sollen die Begriffe haben?</mat-label>
+          <mat-select formControlName="selectedThemes" multiple>
+            <mat-option *ngFor="let theme of themes" [value]="theme">{{
+              theme.name
+            }}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="sessionForm.get('selectedThemes').invalid">{{
+            getErrorMessage('selectedThemes')
+          }}</mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="fill">
+          <mat-label>Wie heißt das erste Team?</mat-label>
+          <input
+            matInput
+            formControlName="team1Name"
+            type="text"
+            maxlength="16"
+            placeholder="Rot"
+          />
+          <mat-icon matSuffix>people_outline</mat-icon>
+          <mat-error *ngIf="sessionForm.get('team1Name').invalid">{{
+            getErrorMessage('team1Name')
+          }}</mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="fill">
+          <mat-label>Welche Farbe hat das erste Team?</mat-label>
+          <input
+            matInput
+            formControlName="team1Color"
+            [ngxMatColorPicker]="pickerTeam1"
+          />
+          <ngx-mat-color-toggle
+            matSuffix
+            [for]="pickerTeam1"
+          ></ngx-mat-color-toggle>
+          <ngx-mat-color-picker
+            #pickerTeam1
+            color="primary"
+          ></ngx-mat-color-picker>
+          <mat-error *ngIf="sessionForm.get('team1Color').invalid">{{
+            getErrorMessage('team1Color')
+          }}</mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="fill">
+          <mat-label>Und wie heißt das zweite Team?</mat-label>
+          <input
+            matInput
+            formControlName="team2Name"
+            type="text"
+            maxlength="16"
+            placeholder="Blau"
+          />
+          <mat-icon matSuffix>people</mat-icon>
+          <mat-error *ngIf="sessionForm.get('team2Name').invalid">{{
+            getErrorMessage('team2Name')
+          }}</mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="fill">
+          <mat-label>Und welche Farbe hat das zweite Team?</mat-label>
+          <input
+            matInput
+            formControlName="team2Color"
+            [ngxMatColorPicker]="pickerTeam2"
+          />
+          <ngx-mat-color-toggle
+            matSuffix
+            [for]="pickerTeam2"
+          ></ngx-mat-color-toggle>
+          <ngx-mat-color-picker
+            #pickerTeam2
+            color="primary"
+          ></ngx-mat-color-picker>
+          <mat-error *ngIf="sessionForm.get('team2Color').invalid">{{
+            getErrorMessage('team2Color')
+          }}</mat-error>
+        </mat-form-field>
+      </p>
 
-    <div class="form-group">
-      <button mat-raised-button color="primary" (click)="createSession()">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="!sessionForm.valid"
+        (click)="createSession()"
+      >
         Spiel erstellen
       </button>
+      &nbsp;&nbsp;&nbsp;
       <button mat-raised-button color="warn" [routerLink]="'/willkommen'">
         Abbrechen
       </button>
-    </div>
+    </form>
   </mat-card>
 </div>

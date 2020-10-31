@@ -5,7 +5,13 @@ import { environment } from '../../environments/environment';
 
 import { Response } from '@spark-fountain/alias-game';
 import { Router } from '@angular/router';
-import { AbstractControl, FormControl, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  NgForm,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'spark-fountain-alias-game-create-new-session',
@@ -13,19 +19,13 @@ import { AbstractControl, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./create-new-session.component.scss'],
 })
 export class CreateNewSessionComponent implements OnInit {
-  public creator: FormControl;
-  public sessionName: FormControl;
-
-  public horizontal: number;
-  public vertical: number;
+  public sessionForm: FormGroup;
 
   public boardSizes: string[];
   public selectedBoardSize: string;
 
   public themes: Theme[];
   public selectedThemes: FormControl;
-
-  public teams: { name: FormControl; color: AbstractControl }[];
 
   public participant: string;
 
@@ -35,21 +35,6 @@ export class CreateNewSessionComponent implements OnInit {
   constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit(): void {
-    this.creator = new FormControl('', [
-      Validators.required,
-      Validators.minLength(3),
-      Validators.maxLength(16),
-    ]);
-
-    this.sessionName = new FormControl('', [
-      Validators.required,
-      Validators.minLength(3),
-      Validators.maxLength(16),
-    ]);
-
-    this.horizontal = 5;
-    this.vertical = 5;
-
     this.boardSizes = [
       '3 x 3',
       '4 x 3',
@@ -59,9 +44,7 @@ export class CreateNewSessionComponent implements OnInit {
       '6 x 5',
       '6 x 6',
     ];
-    this.selectedBoardSize = this.boardSizes[4];
 
-    // TODO: allow multiple themes!
     this.themes = [
       {
         name: 'Gemischte Begriffe',
@@ -84,29 +67,36 @@ export class CreateNewSessionComponent implements OnInit {
         file: 'corona',
       },
     ];
-    this.selectedThemes = new FormControl([], [Validators.required]);
 
-    this.teams = [
-      {
-        name: new FormControl('', [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(16),
-        ]),
-        color: new FormControl('', [
-          Validators.required,
-          Validators.pattern('#[0-9a-f]{6}'),
-        ]),
-      },
-      {
-        name: new FormControl('', [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(16),
-        ]),
-        color: new FormControl('', [Validators.required]),
-      },
-    ];
+    this.sessionForm = new FormGroup({
+      creator: new FormControl('', [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(16),
+      ]),
+      sessionName: new FormControl('', [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(16),
+      ]),
+      selectedBoardSize: new FormControl(this.boardSizes[4]),
+      selectedThemes: new FormControl([], [Validators.required]),
+      team1Name: new FormControl('', [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(16),
+      ]),
+      team1Color: new FormControl('', [
+        Validators.required,
+        Validators.pattern('#[0-9a-f]{6}'),
+      ]),
+      team2Name: new FormControl('', [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(16),
+      ]),
+      team2Color: new FormControl('', [Validators.required]),
+    });
 
     this.iAmActivePlayer = false;
 
@@ -146,53 +136,58 @@ export class CreateNewSessionComponent implements OnInit {
   getErrorMessage(field: string): string {
     switch (field) {
       case 'creator':
-        if (this.creator.hasError('required')) {
+        if (this.sessionForm.get('creator').hasError('required')) {
           return 'Bitte gib deinen Namen ein';
-        } else if (this.creator.hasError('minlength')) {
+        } else if (this.sessionForm.get('creator').hasError('minlength')) {
           return 'Gib bitte mindestens drei Zeichen ein';
-        } else if (this.creator.hasError('maxlength')) {
+        } else if (this.sessionForm.get('creator').hasError('maxlength')) {
           return 'Bitte beschränke dich auf 16 Zeichen';
         }
       case 'sessionName':
-        if (this.sessionName.hasError('required')) {
+        if (this.sessionForm.get('sessionName').hasError('required')) {
           return 'Bitte gib einen Session-Namen ein';
-        } else if (this.sessionName.hasError('minlength')) {
+        } else if (this.sessionForm.get('sessionName').hasError('minlength')) {
           return 'Gib bitte mindestens drei Zeichen ein';
-        } else if (this.sessionName.hasError('maxlength')) {
+        } else if (this.sessionForm.get('sessionName').hasError('maxlength')) {
           return 'Bitte beschränke dich auf 16 Zeichen';
         }
       case 'selectedThemes':
         return 'Bitte wähle mindestens ein Thema aus';
       case 'team1Name':
-        if (this.teams[0].name.hasError('required')) {
+        if (this.sessionForm.get('team1Name').hasError('required')) {
           return 'Bitte gib einen Team-Namen ein';
-        } else if (this.teams[0].name.hasError('minlength')) {
+        } else if (this.sessionForm.get('team1Name').hasError('minlength')) {
           return 'Gib bitte mindestens drei Zeichen ein';
-        } else if (this.teams[0].name.hasError('maxlength')) {
+        } else if (this.sessionForm.get('team1Name').hasError('maxlength')) {
           return 'Bitte beschränke dich auf 16 Zeichen';
         }
       case 'team1Color':
-        if (this.teams[0].color.hasError('pattern')) {
+        if (this.sessionForm.get('team1Color').hasError('pattern')) {
           return 'Ungültiger Farb-Code';
-        } else if (this.teams[0].color.hasError('required')) {
+        } else if (this.sessionForm.get('team1Color').hasError('required')) {
           return 'Bitte klicke auf das rechte Icon oder tippe einen Farbcode ein';
         }
       case 'team2Name':
-        if (this.teams[1].name.hasError('required')) {
+        if (this.sessionForm.get('team2Name').hasError('required')) {
           return 'Bitte gib einen Team-Namen ein';
-        } else if (this.teams[1].name.hasError('minlength')) {
+        } else if (this.sessionForm.get('team2Name').hasError('minlength')) {
           return 'Gib bitte mindestens drei Zeichen ein';
-        } else if (this.teams[1].name.hasError('maxlength')) {
+        } else if (this.sessionForm.get('team2Name').hasError('maxlength')) {
           return 'Bitte beschränke dich auf 16 Zeichen';
         }
       case 'team1Color':
-        if (this.teams[1].color.hasError('pattern')) {
+        if (this.sessionForm.get('team2Color').hasError('pattern')) {
           return 'Ungültiger Farb-Code';
-        } else if (this.teams[1].color.hasError('required')) {
+        } else if (this.sessionForm.get('team2Color').hasError('required')) {
           return 'Bitte klicke auf das rechte Icon oder tippe einen Farbcode ein';
         }
     }
     return 'Unbekannter Fehler';
+  }
+
+  onSubmit() {
+    console.log(this.sessionForm.value); // { first: '', last: '' }
+    console.log(this.sessionForm.valid); // false
   }
 
   createSession(): void {
