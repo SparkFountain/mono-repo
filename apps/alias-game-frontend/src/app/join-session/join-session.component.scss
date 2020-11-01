@@ -1,0 +1,19 @@
+$cardWidth: 350px;
+
+.card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+mat-card {
+  width: $cardWidth;
+
+  mat-form-field {
+    width: $cardWidth;
+  }
+
+  table {
+    width: 100% !important;
+  }
+}
