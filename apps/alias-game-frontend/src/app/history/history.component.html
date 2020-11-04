@@ -1,25 +1,56 @@
-<table *ngIf="_activeSession">
-  <thead>
-    <tr>
-      <td>Team</td>
-      <td>Begriff</td>
-      <td>Treffer</td>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let event of historyEvents">
-      <td>
-        {{ event.team }}
-      </td>
-      <td>{{ event.description }} {{ event.amount }}</td>
-      <td>
-        <div *ngIf="event.teamA > 0" class="color" [ngStyle]="{ background: '#c22b0c' }">{{ event.teamA }}</div>
-        <div *ngIf="event.teamB > 0" class="color" [ngStyle]="{ background: '#0b6bca' }">{{ event.teamB }}</div>
-        <div *ngIf="event.neutral > 0" class="color" [ngStyle]="{ background: '#dddddd' }">
-          {{ event.neutral }}
-        </div>
-        <div *ngIf="event.black > 0" class="color" [ngStyle]="{ background: '#222222' }">{{ event.black }}</div>
-      </td>
-    </tr>
-  </tbody>
+<table mat-table [dataSource]="dataSource" *ngIf="_activeSession">
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+  <ng-container matColumnDef="team">
+    <th mat-header-cell *matHeaderCellDef>Team</th>
+    <td mat-cell *matCellDef="let element">
+      <button
+        mat-mini-fab
+        [ngStyle]="{ 'background-color': '#' + element.team }"
+      ></button>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="term">
+    <th mat-header-cell *matHeaderCellDef>Begriff</th>
+    <td mat-cell *matCellDef="let element">{{ element.term }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="hits">
+    <th mat-header-cell *matHeaderCellDef>Treffer</th>
+    <td mat-cell *matCellDef="let element">
+      <button
+        mat-mini-fab
+        [ngStyle]="{ 'background-color': 'red' }"
+        *ngIf="element.hits.team1 > 0"
+      >
+        <mat-icon>{{ element.hits.team1 }}</mat-icon>
+      </button>
+      <button
+        mat-mini-fab
+        [ngStyle]="{ 'background-color': 'blue' }"
+        *ngIf="element.hits.team2 > 0"
+      >
+        <mat-icon>{{ element.hits.team2 }}</mat-icon>
+      </button>
+      <button
+        mat-mini-fab
+        [ngStyle]="{ 'background-color': 'yellow' }"
+        *ngIf="element.hits.neutral > 0"
+      >
+        <mat-icon>{{ element.hits.neutral }}</mat-icon>
+      </button>
+      <button
+        mat-mini-fab
+        [ngStyle]="{ 'background-color': 'black' }"
+        *ngIf="element.hits.black > 0"
+      >
+        <mat-icon>{{ element.hits.black }}</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>

@@ -1,10 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
-import {
-  Session,
-  HistoryEvent,
-  Response,
-} from '@spark-fountain/alias-game';
+import { Session, HistoryEvent, Response } from '@spark-fountain/alias-game';
 import { environment } from '../../environments/environment';
 
 @Component({
@@ -19,12 +15,28 @@ export class HistoryComponent implements OnInit {
     this._activeSession = session;
   }
 
+  displayedColumns: string[] = ['team', 'term', 'hits'];
+  dataSource: any;
+
   public historyEvents: HistoryEvent[];
 
-  constructor(private http: HttpClient) {}
+  constructor() {}
 
   ngOnInit(): void {
     this.historyEvents = [];
+
+    this.dataSource = [
+      {
+        team: 'ff0000',
+        term: 'Urlaub 4',
+        hits: {
+          team1: 2,
+          team2: 0,
+          neutral: 1,
+          black: 0,
+        },
+      },
+    ];
 
     // setInterval(() => {
     //   this.http

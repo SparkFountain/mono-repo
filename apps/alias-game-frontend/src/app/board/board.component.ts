@@ -52,7 +52,8 @@ export class BoardComponent implements OnInit {
   ngOnInit(): void {}
 
   ngAfterViewInit(): void {
-    setTimeout(() => this.prepareCards(), 10);
+    // TODO: remove?
+    // setTimeout(() => this.prepareCards(), 10);
   }
 
   prepareCards(): void {
@@ -65,8 +66,11 @@ export class BoardComponent implements OnInit {
     });
 
     this.cardSize = {
-      width: (window.innerWidth * 0.6) / this._activeSession.horizontal - 10,
-      height: (window.innerHeight - 300) / this._activeSession.vertical,
+      width: 800 / 5,
+      height: (904 / 5 / 91) * 59,
+
+      // width: (window.innerWidth * 0.6) / this._activeSession.horizontal - 10,
+      // height: (window.innerHeight - 300) / this._activeSession.vertical,
     };
   }
 
@@ -86,11 +90,7 @@ export class BoardComponent implements OnInit {
     body.set('y', y.toString());
 
     this.http
-      .post(
-        `/api/select-card`,
-        body.toString(),
-        environment.formHeader
-      )
+      .post(`/api/select-card`, body.toString(), environment.formHeader)
       .toPromise()
       .then(() => {
         // detect color of selected card
@@ -160,21 +160,13 @@ export class BoardComponent implements OnInit {
     body.set('black', this.selectedCards.black.toString());
 
     this.http
-      .post(
-        `/api/add-history-event`,
-        body.toString(),
-        environment.formHeader
-      )
+      .post(`/api/add-history-event`, body.toString(), environment.formHeader)
       .toPromise()
       .then(() => {
         const body = new URLSearchParams();
         body.set('session', this._activeSession.name);
         this.http
-          .post(
-            `/api/next-round`,
-            body.toString(),
-            environment.formHeader
-          )
+          .post(`/api/next-round`, body.toString(), environment.formHeader)
           .toPromise();
       });
   }
@@ -191,11 +183,7 @@ export class BoardComponent implements OnInit {
     body.set('y', term.y.toString());
 
     this.http
-      .post(
-        `/api/exchange-term`,
-        body.toString(),
-        environment.formHeader
-      )
+      .post(`/api/exchange-term`, body.toString(), environment.formHeader)
       .toPromise();
   }
 }

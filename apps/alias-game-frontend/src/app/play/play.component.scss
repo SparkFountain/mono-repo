@@ -8,29 +8,34 @@
   width: 100%;
   height: auto;
 
-  app-players {
+  spark-fountain-alias-game-players {
     width: 15vw;
   }
 
-  app-board {
-    width: 60vw;
+  spark-fountain-alias-game-board {
+    width: 904px;
+    height: 600px;
+    background: url(/assets/board.jpg);
+    box-shadow: 2px 10px 10px $black;
   }
 
   .ui-right {
-    width: 15vw;
+    width: 300px;
+    background: purple;
     display: flex;
     flex-direction: column;
 
-    app-code-sheet {
+    spark-fountain-alias-game-code-sheet {
       box-shadow: $dark-shadow;
       background: $blur;
     }
 
-    app-history {
+    spark-fountain-alias-game-history {
+      width: 100%;
     }
   }
 
-  app-winner {
+  spark-fountain-alias-game-winner {
     display: block;
     position: fixed;
     width: 500px;

@@ -80,11 +80,7 @@ export class PlayersComponent implements OnInit {
       body.set('session', this._activeSession.name);
 
       this.http
-        .post(
-          `/api/start-session`,
-          body.toString(),
-          environment.formHeader
-        )
+        .post(`/api/start-session`, body.toString(), environment.formHeader)
         .toPromise();
     } else {
       alert(
@@ -97,11 +93,7 @@ export class PlayersComponent implements OnInit {
     const body = new URLSearchParams();
     body.set('session', this._activeSession.name);
     this.http
-      .post(
-        `/api/next-round`,
-        body.toString(),
-        environment.formHeader
-      )
+      .post(`/api/next-round`, body.toString(), environment.formHeader)
       .toPromise();
   }
 
