@@ -19,7 +19,7 @@ export class PlayersComponent implements OnInit {
     ).name;
     this._activeSession.teams.forEach((team: Team) => {
       team.players.forEach((player: Player) => {
-        if (player.name === this.user.player) {
+        if (player.name === this.user?.player) {
           this.iAmActivePlayer = player.active;
         }
       });

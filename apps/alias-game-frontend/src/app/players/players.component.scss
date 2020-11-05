@@ -49,14 +49,13 @@ button {
     }
 
     .team-color {
-      display: inline-block;
+      display: flex;
       width: 32px;
       height: 32px;
-      border-radius: 50%;
-      box-shadow: 0 0 5px $black;
     }
 
     .team-meta {
+      display: flex;
       width: calc(100% - 32px);
       margin-left: 10px;
 

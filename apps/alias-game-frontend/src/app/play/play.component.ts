@@ -36,14 +36,40 @@ export class PlayComponent implements OnInit {
           name: 'Rot',
           active: true,
           color: 'ff0000',
-          players: [],
+          players: [
+            {
+              name: 'Alf',
+              active: false
+            },
+            {
+              name: 'Barbara',
+              active: false
+            },
+            {
+              name: 'Klöten-Klaus',
+              active: false
+            },
+          ],
           remainingCards: 7,
         },
         {
           name: 'Blau',
           active: false,
           color: '0000ff',
-          players: [],
+          players: [
+            {
+              name: 'Kathi',
+              active: false
+            },
+            {
+              name: 'Werner',
+              active: false
+            },
+            {
+              name: 'Kalle Schwansen',
+              active: false
+            },
+          ],
           remainingCards: 8,
         },
       ],
