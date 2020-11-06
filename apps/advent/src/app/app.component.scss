@@ -6,7 +6,7 @@
 .main-menu {
   background: red; //url('/assets/gfx/main-menu.jpg');
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - env(viewport-nav-resize));
   overflow: hidden;
   display: flex;
   justify-content: center;
