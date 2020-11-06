@@ -4,7 +4,7 @@
 }
 
 .main-menu {
-  background: url('/assets/gfx/main-menu.jpg');
+  background: red; //url('/assets/gfx/main-menu.jpg');
   width: 100vw;
   height: 100vh;
   overflow: hidden;
@@ -13,8 +13,8 @@
   align-items: center;
 
   .main-frame {
-    width: 500px;
-    height: 889px;
+    width: 400px;
+    height: 640px;
     background: url('/assets/gfx/scenes/1.jpg');
   }
 }
