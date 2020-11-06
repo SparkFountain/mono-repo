@@ -1,0 +1,20 @@
+::ng-deep * {
+  margin: 0;
+  padding: 0;
+}
+
+.main-menu {
+  background: url('/assets/gfx/main-menu.jpg');
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .main-frame {
+    width: 720px;
+    height: 1280px;
+    background: url('/assets/gfx/scenes/1.jpg');
+  }
+}

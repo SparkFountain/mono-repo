@@ -35,6 +35,13 @@
     },
     "alias-game-backend": {
       "tags": []
+    },
+    "advent": {
+      "tags": []
+    },
+    "advent-e2e": {
+      "tags": [],
+      "implicitDependencies": ["advent"]
     }
   }
 }

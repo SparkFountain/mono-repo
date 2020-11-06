@@ -206,6 +206,125 @@
           }
         }
       }
+    },
+    "advent": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/advent",
+      "sourceRoot": "apps/advent/src",
+      "prefix": "spark-fountain",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/advent",
+            "index": "apps/advent/src/index.html",
+            "main": "apps/advent/src/main.ts",
+            "polyfills": "apps/advent/src/polyfills.ts",
+            "tsConfig": "apps/advent/tsconfig.app.json",
+            "aot": true,
+            "assets": ["apps/advent/src/favicon.ico", "apps/advent/src/assets"],
+            "styles": ["apps/advent/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/advent/src/environments/environment.ts",
+                  "with": "apps/advent/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "advent:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "advent:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "advent:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/advent/tsconfig.app.json",
+              "apps/advent/tsconfig.spec.json",
+              "apps/advent/tsconfig.editor.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/advent/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/advent/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "advent-e2e": {
+      "root": "apps/advent-e2e",
+      "sourceRoot": "apps/advent-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/advent-e2e/cypress.json",
+            "tsConfig": "apps/advent-e2e/tsconfig.e2e.json",
+            "devServerTarget": "advent:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "advent:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/advent-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/advent-e2e/**/*"]
+          }
+        }
+      }
     }
   },
   "cli": {
