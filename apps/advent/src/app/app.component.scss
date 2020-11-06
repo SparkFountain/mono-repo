@@ -14,7 +14,7 @@
 
   .main-frame {
     width: 360px;
-    height: 640px;
+    height: calc(100vh - env(viewport-nav-resize));
     background: url('/assets/gfx/scenes/1.jpg');
   }
 }
