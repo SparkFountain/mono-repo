@@ -18,6 +18,10 @@ const routes: Routes = [
     loadChildren: () => import('./map/map.module').then((m) => m.MapModule),
   },
   {
+    path: 'gewonnen',
+    loadChildren: () => import('./jazzchor/jazzchor.module').then((m) => m.JazzchorModule),
+  },
+  {
     path: '404',
     loadChildren: () =>
       import('./not-found/not-found.module').then((m) => m.NotFoundModule),
