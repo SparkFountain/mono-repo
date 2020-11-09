@@ -1,3 +1,5 @@
+@import './app/variables.scss';
+
 html,
 body {
   margin: 0 !important;
@@ -8,6 +10,50 @@ body {
   -webkit-overflow-scrolling: touch;
 
   color: #eee;
-  background: url('/assets/gfx/main-menu.jpg');
+  background: url('/assets/gfx/background.jpg');
   background-size: contain;
+
+  font-family: 'Patrick Hand', cursive;
+}
+
+h1 {
+  font-size: 50px;
+  font-family: 'Amatic SC', cursive;
+  text-shadow: 2px 2px #cf7a77;
+}
+
+.white {
+  color: $white;
+}
+
+.red-dark {
+  color: $red-dark;
+}
+
+.red {
+  color: $red;
+}
+
+.green {
+  color: $green;
+}
+
+.green-dark {
+  color: $green-dark;
+}
+
+.grey {
+  color: $grey;
+}
+
+.black {
+  color: $black;
+}
+
+.circle-shadow-light {
+  text-shadow: 0 0 10px $white;
+}
+
+.circle-shadow-dark {
+  text-shadow: 0 0 10px $black;
 }
