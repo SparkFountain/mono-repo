@@ -8,6 +8,7 @@
     "nx": "nx",
     "start": "ng serve --proxy-config proxy.conf.json",
     "build": "ng build",
+    "build-advent": "ng build advent && cp apps/advent/src/.htaccess dist/apps/advent",
     "test": "ng test",
     "lint": "nx workspace-lint && ng lint",
     "e2e": "ng e2e",
