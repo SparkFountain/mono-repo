@@ -31,6 +31,7 @@
   left: 262px;
   transform: rotate(12deg);
   color: $red-dark;
+  opacity: 0.8;
 }
 
 .ladder01 {
@@ -61,6 +62,7 @@
   top: 432px;
   left: 88px;
   color: $black;
+  opacity: 0.4;
 }
 
 .cloud01 {
@@ -81,4 +83,19 @@
   color: $red;
   opacity: 0.2;
   transform: rotate(23deg);
+}
+
+.male01 {
+  top: 160px;
+  left: 2px;
+  color: $black;
+  transform: rotate(-18deg);
+  opacity: 0.75;
+}
+
+.female01 {
+  top: 160px;
+  left: 43px;
+  color: $black;
+  opacity: 0.75;
 }
