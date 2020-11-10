@@ -1,7 +1,84 @@
+@import '../../variables.scss';
+
 .container {
   width: 100%;
   height: 100%;
   background: url('/assets/gfx/scenes/pool.jpg') no-repeat;
   text-align: center;
   overflow: hidden;
+
+  .absolute {
+    position: absolute;
+
+    h1 {
+      position: absolute;
+      width: 360px;
+    }
+  }
+}
+
+.fas {
+  position: absolute;
+}
+
+.shower01 {
+  top: 180px;
+  left: 82px;
+}
+
+.ship01 {
+  top: 400px;
+  left: 262px;
+  transform: rotate(12deg);
+  color: $red-dark;
+}
+
+.ladder01 {
+  top: 300px;
+  left: 262px;
+  color: $grey;
+}
+
+.drop01 {
+  top: 196px;
+  left: 262px;
+  color: $green;
+}
+
+.hat01 {
+  top: 107px;
+  left: 180px;
+  color: $red;
+}
+
+.waterball01 {
+  top: 299px;
+  left: 88px;
+  color: $green-dark;
+}
+
+.fish01 {
+  top: 432px;
+  left: 88px;
+  color: $black;
+}
+
+.cloud01 {
+  top: 10px;
+  left: 188px;
+  color: $grey;
+}
+
+.anchor01 {
+  top: 340px;
+  left: 118px;
+  color: $red;
+}
+
+.ring01 {
+  top: 20px;
+  left: 18px;
+  color: $red;
+  opacity: 0.2;
+  transform: rotate(23deg);
 }
