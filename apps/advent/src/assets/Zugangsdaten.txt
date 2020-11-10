@@ -1,0 +1,4 @@
+-QR-Code: siehe /assets/gfx/qr-code.png
+-URL: https://bit.ly/38tGKpu
+
+  -> wird weitergeleitet auf https://advent.sparkfountain.de
