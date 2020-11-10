@@ -1,0 +1,69 @@
+@import '../../variables.scss';
+
+.container {
+  width: 100%;
+  height: 100%;
+  background: url('/assets/gfx/scenes/cableway.jpg') no-repeat;
+  text-align: center;
+  overflow: hidden;
+
+  .absolute {
+    position: absolute;
+
+    h1 {
+      position: absolute;
+      width: 360px;
+    }
+  }
+}
+
+.fas {
+  position: absolute;
+}
+
+.snowflake01 {
+  top: 100px;
+  left: 100px;
+}
+
+.grin01 {
+  top: 3px;
+  left: 170px;
+  color: $grey;
+  opacity: 0.5;
+}
+
+.ski01 {
+  top: 300px;
+  left: 250px;
+  color: $black;
+  opacity: 0.3;
+  transform: rotate(45deg);
+}
+
+.tree01 {
+  top: 450px;
+  left: 320px;
+  color: $green;
+  opacity: 0.4;
+}
+
+.gift01 {
+  top: 500px;
+  left: 220px;
+  color: $red;
+}
+
+.pawn01 {
+  top: 190px;
+  left: 120px;
+  color: $green-dark;
+  transform: rotate(37deg);
+}
+
+.snowman01 {
+  top: 432px;
+  left: 130px;
+  opacity: 0.15;
+  transform: rotate(-5deg);
+}

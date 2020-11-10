@@ -1,0 +1,29 @@
+@import '../../variables.scss';
+
+.container {
+  width: 100%;
+  height: 100%;
+  background: url('/assets/gfx/how-to-play.jpg');
+  text-align: center;
+
+  h1 {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+
+  p {
+    text-align: justify;
+    padding: 10px 50px;
+    background-color: rgba($white, 0.25);
+  }
+
+  .fa-play-circle {
+    margin-top: 50px;
+  }
+
+  .okay {
+    position: absolute;
+    top: calc((100vh / 2) + 120px);
+    left: calc((100vw / 2) + 70px);
+  }
+}
