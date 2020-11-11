@@ -6,6 +6,6 @@ export interface CollectableObject {
     left: number;
     transform?: string;
     opacity?: number;
-    color?: string;
   };
+  classes?: string[];
 }

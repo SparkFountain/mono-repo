@@ -22,11 +22,12 @@ export class ContainerComponent implements OnInit {
   }
 
   moveWords(direction: 'left' | 'right'): void {
-    console.info('MOVE WORDS', direction);
-
     if (direction === 'left' && this.wordOffset > 0) {
       this.wordOffset--;
-    } else if (direction === 'right' && (this.wordOffset < this.words.length-1)) {
+    } else if (
+      direction === 'right' &&
+      this.wordOffset < this.words.length - 1
+    ) {
       this.wordOffset++;
     }
   }

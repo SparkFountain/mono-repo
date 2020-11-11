@@ -1,25 +1,18 @@
-<div class="container">
+<div
+  class="container"
+  [ngStyle]="{ background: 'url(\'/assets/gfx/scenes/bar.jpg\') no-repeat' }"
+>
   <div class="absolute">
+    <!-- MAP SYMBOL -->
+    <i class="fas fa-scroll green-dark fa-1x back-to-map circle-shadow-dark" routerLink="/karte"></i>
+
+    <!-- HELP SYMBOL -->
+    <i class="fas fa-question-circle red fa-1x help circle-shadow-dark" (click)="help()"></i>
+
     <!-- CLICKABLE OBJECTS -->
-    <i class="fas fa-pray fa-2x pray01 circle-shadow-dark"></i>
-
-    <i class="fas fa-bible fa-1x bible01 circle-shadow-dark"></i>
-
-    <i class="fas fa-mosque fa-3x mosque01 circle-shadow-dark"></i>
-
-    <i class="fas fa-star-and-crescent fa-2x halfmoon01 circle-shadow-dark"></i>
-
-    <i class="far fa-eye fa-1x eye01 circle-shadow-dark"></i>
-
-    <i class="fab fa-itunes-note fa-1x note01 circle-shadow-dark"></i>
-
-    <i class="fas fa-menorah fa-2x candles01"></i>
-
-    <i class="fas fa-magic fa-2x wand01"></i>
-
-    <i class="fas fa-baby fa-3x baby01 circle-shadow-light"></i>
-
-    <i class="fas fa-bell fa-1x bell01 circle-shadow-light"></i>
+    <ng-container *ngFor="let obj of scene.objects">
+      <i [class]="renderClasses(obj)" [ngStyle]="renderStyle(obj)"></i>
+    </ng-container>
 
     <!-- PLACEHOLDER OBJECTS -->
   </div>
