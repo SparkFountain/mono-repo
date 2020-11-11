@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { JazzchorComponent } from './jazzchor.component';
+import { SceneComponent } from './scene.component';
 
-describe('JazzchorComponent', () => {
-  let component: JazzchorComponent;
-  let fixture: ComponentFixture<JazzchorComponent>;
+describe('SceneComponent', () => {
+  let component: SceneComponent;
+  let fixture: ComponentFixture<SceneComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ JazzchorComponent ]
+      declarations: [ SceneComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(JazzchorComponent);
+    fixture = TestBed.createComponent(SceneComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -68,11 +68,6 @@ const routes: Routes = [
       import('./hotel/hotel.module').then((m) => m.HotelModule),
   },
   {
-    path: 'gewonnen',
-    loadChildren: () =>
-      import('./jazzchor/jazzchor.module').then((m) => m.JazzchorModule),
-  },
-  {
     path: '404',
     loadChildren: () =>
       import('./not-found/not-found.module').then((m) => m.NotFoundModule),

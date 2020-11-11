@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { JazzchorComponent } from './jazzchor.component';
+import { SceneComponent } from './scene.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: JazzchorComponent,
+    component: SceneComponent,
   },
 ];
 
@@ -13,4 +13,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class JazzchorRoutingModule {}
+export class SceneRoutingModule {}
