@@ -21,7 +21,7 @@ export class PoolComponent implements OnInit {
       'Fisch',
       'Regenwolke',
       'Anker',
-      ''
+      'Rettungsring'
     ];
   }
 }

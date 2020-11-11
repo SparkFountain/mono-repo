@@ -15,16 +15,6 @@ export class ContainerComponent implements OnInit {
   @Input('words') words: string[];
   wordOffset: number;
 
-  @ViewChild('arrowLeft') arrowLeft: any;
-  @ViewChild('arrowRight') arrowRight: any;
-
-  // TODO: implement or remove
-  // @HostListener('document:mousedown', ['$event']) onMouseDownHandler(
-  //   event: MouseEvent
-  // ) {
-  //   console.log(event);
-  // }
-
   constructor() {}
 
   ngOnInit(): void {
@@ -34,9 +24,9 @@ export class ContainerComponent implements OnInit {
   moveWords(direction: 'left' | 'right'): void {
     console.info('MOVE WORDS', direction);
 
-    if (direction === 'left') {
+    if (direction === 'left' && this.wordOffset > 0) {
       this.wordOffset--;
-    } else if (direction === 'right') {
+    } else if (direction === 'right' && (this.wordOffset < this.words.length-1)) {
       this.wordOffset++;
     }
   }

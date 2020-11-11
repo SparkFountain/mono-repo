@@ -12,23 +12,13 @@ export class CablewayComponent implements OnInit {
 
   ngOnInit(): void {
     this.words = [
-      'Vogel',
-      'Vogel',
-      'Vogel',
-      'Vogel',
-      'Vogel',
-      'Vogel',
-      'Vogel',
-      'Vogel',
-      'Vogel',
-      'Vogel',
-      'Vogel',
-      'Vogel',
-      'Vogel',
-      'Vogel',
-      'Vogel',
-      'Vogel',
+      'Skifahrer',
+      'Geschenk',
+      'Smiley',
+      'Bauer',
+      'Tanne',
+      'Schneemann',
+      'Stechpalme',
     ];
   }
-
 }

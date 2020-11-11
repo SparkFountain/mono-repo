@@ -1,13 +1,11 @@
-<div class="arrow" #arrowLeft>
+<div class="arrow" (click)="moveWords('left')">
   <i class="fas fa-angle-double-left circle-shadow-light"></i>
 </div>
 
 <div class="word-container" [ngStyle]="{ left: wordOffset + 'px' }">
-  <div class="words">
-    <div class="word" *ngFor="let word of words">{{ word }}</div>
-  </div>
+  <div class="word">{{ words[wordOffset] }}</div>
 </div>
 
-<div class="arrow" #arrowRight>
+<div class="arrow" (click)="moveWords('right')">
   <i class="fas fa-angle-double-right circle-shadow-light"></i>
 </div>

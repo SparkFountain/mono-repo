@@ -42,16 +42,17 @@
 }
 
 .tree01 {
-  top: 450px;
+  top: 350px;
   left: 320px;
   color: $green;
-  opacity: 0.4;
+  opacity: 0.5;
 }
 
 .gift01 {
   top: 420px;
   left: 250px;
   color: $red;
+  opacity: 0.75;
 }
 
 .pawn01 {
@@ -62,8 +63,16 @@
 }
 
 .snowman01 {
-  top: 432px;
-  left: 130px;
+  top: 407px;
+  left: 127px;
   opacity: 0.15;
   transform: rotate(-5deg);
+}
+
+.holly01 {
+  top: 267px;
+  left: 29px;
+  color: $red-dark;
+  opacity: 0.8;
+  transform: rotate(97deg);
 }
