@@ -18,7 +18,10 @@ export class CablewayComponent implements OnInit {
       'Bauer',
       'Tanne',
       'Schneemann',
-      'Stechpalme',
+      'Stechpalmenzweig',
+      'Blatt',
+      'Schneepflug',
+      'Handschuh',
     ];
   }
 }
