@@ -227,7 +227,7 @@
             "polyfills": "apps/advent/src/polyfills.ts",
             "tsConfig": "apps/advent/tsconfig.app.json",
             "aot": true,
-            "assets": ["apps/advent/src/favicon.ico", "apps/advent/src/assets"],
+            "assets": ["apps/advent/src/favicon.png", "apps/advent/src/assets"],
             "styles": ["apps/advent/src/styles.scss"],
             "scripts": []
           },
