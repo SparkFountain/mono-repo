@@ -2,19 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { Scene } from '../interfaces/scene.interface';
 
 @Component({
-  selector: 'spark-fountain-bar',
+  selector: 'spark-fountain-advent-bar',
   templateUrl: './bar.component.html',
   styleUrls: ['./bar.component.scss'],
 })
 export class BarComponent implements OnInit {
-  words: string[];
   scene: Scene;
 
   constructor() {}
 
   ngOnInit(): void {
-    this.words = [''];
-
     this.scene = {
       name: 'Bar',
       backgroundUrl: 'bar.jpg',

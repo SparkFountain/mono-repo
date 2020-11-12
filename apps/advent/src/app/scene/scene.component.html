@@ -1,13 +1,13 @@
 <div
   class="container"
-  [ngStyle]="{ background: 'url(\'/assets/gfx/scenes/bar.jpg\') no-repeat' }"
+  [ngStyle]="{ background: renderBackgroundUrl() }"
 >
   <div class="absolute">
     <!-- MAP SYMBOL -->
-    <i class="fas fa-scroll green-dark fa-1x back-to-map circle-shadow-dark" routerLink="/karte"></i>
+    <i class="fas fa-scroll green-dark fa-1x back-to-map" routerLink="/karte"></i>
 
     <!-- HELP SYMBOL -->
-    <i class="fas fa-question-circle red fa-1x help circle-shadow-dark" (click)="help()"></i>
+    <i class="fas fa-question-circle red fa-1x help" (click)="help()"></i>
 
     <!-- CLICKABLE OBJECTS -->
     <ng-container *ngFor="let obj of scene.objects">

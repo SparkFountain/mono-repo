@@ -20,6 +20,10 @@ export class SceneComponent implements OnInit {
     });
   }
 
+  renderBackgroundUrl(): string {
+    return `url('/assets/gfx/scenes/${this.scene.backgroundUrl}') no-repeat`;
+  }
+
   renderStyle(obj: CollectableObject): object {
     return {
       top: `${obj.style.top}px`,
