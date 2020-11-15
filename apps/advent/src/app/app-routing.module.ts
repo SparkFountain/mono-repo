@@ -10,7 +10,7 @@ const routes: Routes = [
   },
   { path: '', redirectTo: '/willkommen', pathMatch: 'full' },
   {
-    path: 'so-wird-gespielt',
+    path: 'spielanleitung',
     loadChildren: () =>
       import('./how-to-play/how-to-play.module').then((m) => m.HowToPlayModule),
   },
@@ -72,7 +72,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./not-found/not-found.module').then((m) => m.NotFoundModule),
   },
-  { path: '**', redirectTo: '/404', pathMatch: 'full' },
+  { path: '**', redirectTo: '/willkommen', pathMatch: 'full' },
 ];
 
 @NgModule({

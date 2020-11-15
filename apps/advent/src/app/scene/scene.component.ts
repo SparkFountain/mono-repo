@@ -10,11 +10,13 @@ import { Scene } from '../interfaces/scene.interface';
 export class SceneComponent implements OnInit {
   @Input('scene') scene: Scene;
   words: string[];
+  wordOffset: number;
 
   constructor() {}
 
   ngOnInit(): void {
     this.words = [];
+    this.wordOffset = 0;
     this.scene.objects?.forEach((obj: CollectableObject) => {
       this.words.push(obj.name);
     });
@@ -39,7 +41,25 @@ export class SceneComponent implements OnInit {
     return result;
   }
 
+  changedWord(offset: number): void {
+    this.wordOffset += offset;
+  }
+
   help(): void {
-    console.info('[TODO] implement help');
+    // in case of missing classes array, add it
+    if (!this.scene.objects[this.wordOffset].classes) {
+      this.scene.objects[this.wordOffset].classes = [];
+    }
+
+    // highlight active object
+    this.scene.objects[this.wordOffset].classes.push(
+      'animate__animated animate__flash'
+    );
+
+    setTimeout(() => this.scene.objects[this.wordOffset].classes.pop(), 1000);
+  }
+
+  collect(e: any): void {
+    console.info('[COLLECT]', e);
   }
 }

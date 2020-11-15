@@ -25,9 +25,11 @@
 .back-to-map {
   top: 10px;
   left: 10px;
+  z-index: 10000;
 }
 
 .help {
   top: 10px;
-  left: 334px;
+  left: 318px;
+  z-index: 10000;
 }

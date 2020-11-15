@@ -3,20 +3,20 @@
     <!-- MAP SYMBOL -->
     <i
       *ngIf="scene.objects"
-      class="fas fa-scroll green-dark fa-1x back-to-map"
+      class="fas fa-scroll green-dark circle-shadow-light fa-2x back-to-map"
       routerLink="/karte"
     ></i>
 
     <!-- HELP SYMBOL -->
     <i
       *ngIf="scene.objects"
-      class="fas fa-question-circle red fa-1x help"
+      class="fas fa-question-circle red circle-shadow-light fa-2x help"
       (click)="help()"
     ></i>
 
     <!-- CLICKABLE OBJECTS -->
     <ng-container *ngFor="let obj of scene.objects">
-      <i [class]="renderClasses(obj)" [ngStyle]="renderStyle(obj)"></i>
+      <i [class]="renderClasses(obj)" [ngStyle]="renderStyle(obj)" (click)="collect($this)"></i>
     </ng-container>
 
     <!-- PLACEHOLDER OBJECTS -->
@@ -28,5 +28,6 @@
   <spark-fountain-advent-container
     *ngIf="scene.objects"
     [words]="words"
+    (changedWord)="changedWord($event)"
   ></spark-fountain-advent-container>
 </div>
