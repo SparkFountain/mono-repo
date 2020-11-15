@@ -92,7 +92,5 @@ export class SceneComponent implements OnInit {
         setTimeout(() => this.router.navigateByUrl('/karte'), 3000);
       }
     }, 1000);
-
-    console.info('[COLLECT]', objectName);
   }
 }
