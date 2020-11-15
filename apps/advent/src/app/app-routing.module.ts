@@ -29,7 +29,7 @@ const routes: Routes = [
       import('./forest/forest.module').then((m) => m.ForestModule),
   },
   {
-    path: 'iglu',
+    path: 'siedlung',
     loadChildren: () =>
       import('./igloo/igloo.module').then((m) => m.IglooModule),
   },
@@ -38,7 +38,7 @@ const routes: Routes = [
     loadChildren: () => import('./zoo/zoo.module').then((m) => m.ZooModule),
   },
   {
-    path: 'schlittschuh-laufen',
+    path: 'eislaufen',
     loadChildren: () =>
       import('./ice-skating/ice-skating.module').then(
         (m) => m.IceSkatingModule

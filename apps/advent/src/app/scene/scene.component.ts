@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CollectableObject } from '../interfaces/collectable-object.interface';
 import { Scene } from '../interfaces/scene.interface';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'spark-fountain-advent-scene',
@@ -13,7 +14,7 @@ export class SceneComponent implements OnInit {
   words: string[];
   wordOffset: number;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private location: Location) {}
 
   ngOnInit(): void {
     this.words = [];
@@ -44,6 +45,10 @@ export class SceneComponent implements OnInit {
 
   changedWord(offset: number): void {
     this.wordOffset += offset;
+  }
+
+  back(): void {
+    this.location.back();
   }
 
   help(): void {
@@ -84,7 +89,7 @@ export class SceneComponent implements OnInit {
       }
 
       if (this.words.length === 0) {
-        setTimeout(() => this.router.navigateByUrl('/karte'), 2000);
+        setTimeout(() => this.router.navigateByUrl('/karte'), 3000);
       }
     }, 1000);
 
