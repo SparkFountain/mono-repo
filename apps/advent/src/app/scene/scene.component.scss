@@ -33,3 +33,10 @@
   left: 318px;
   z-index: 10000;
 }
+
+.trophy {
+  color: #e2b007;
+  top: calc((512px / 2) - (160px / 2));
+  left: calc((360px / 2) - (180px / 2));
+  z-index: 20000;
+}

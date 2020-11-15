@@ -7,8 +7,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class ContainerComponent implements OnInit {
   @Input('words') words: string[];
+  @Input('wordOffset') wordOffset: number;
   @Output('changedWord') changedWord: EventEmitter<number>;
-  wordOffset: number;
 
   constructor() {
     this.changedWord = new EventEmitter<number>();
@@ -20,13 +20,11 @@ export class ContainerComponent implements OnInit {
 
   moveWords(direction: 'left' | 'right'): void {
     if (direction === 'left' && this.wordOffset > 0) {
-      this.wordOffset--;
       this.changedWord.emit(-1);
     } else if (
       direction === 'right' &&
       this.wordOffset < this.words.length - 1
     ) {
-      this.wordOffset++;
       this.changedWord.emit(1);
     }
   }

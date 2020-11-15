@@ -16,18 +16,29 @@
 
     <!-- CLICKABLE OBJECTS -->
     <ng-container *ngFor="let obj of scene.objects">
-      <i [class]="renderClasses(obj)" [ngStyle]="renderStyle(obj)" (click)="collect($this)"></i>
+      <i
+        [class]="renderClasses(obj)"
+        [ngStyle]="renderStyle(obj)"
+        (click)="collect(obj.name)"
+      ></i>
     </ng-container>
 
     <!-- PLACEHOLDER OBJECTS -->
     <ng-container *ngFor="let dec of scene.decoration">
       <i [class]="renderClasses(dec)" [ngStyle]="renderStyle(dec)"></i>
     </ng-container>
+
+    <!-- TROPHY -->
+    <i
+      *ngIf="scene.objects && scene.objects.length === 0"
+      class="fas fa-trophy trophy fa-10x circle-shadow-light animate__animated animate__fadeInDown animate__flip"
+    ></i>
   </div>
 
   <spark-fountain-advent-container
-    *ngIf="scene.objects"
+    *ngIf="scene.objects && scene.objects.length > 0"
     [words]="words"
+    [wordOffset]="wordOffset"
     (changedWord)="changedWord($event)"
   ></spark-fountain-advent-container>
 </div>

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CollectableObject } from '../interfaces/collectable-object.interface';
 import { Scene } from '../interfaces/scene.interface';
 
@@ -12,7 +13,7 @@ export class SceneComponent implements OnInit {
   words: string[];
   wordOffset: number;
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     this.words = [];
@@ -59,7 +60,34 @@ export class SceneComponent implements OnInit {
     setTimeout(() => this.scene.objects[this.wordOffset].classes.pop(), 1000);
   }
 
-  collect(e: any): void {
-    console.info('[COLLECT]', e);
+  collect(objectName: string): void {
+    // check if correct object has been selected
+    if (!(this.scene.objects[this.wordOffset].name === objectName)) {
+      return;
+    }
+
+    // in case of missing classes array, add it
+    if (!this.scene.objects[this.wordOffset].classes) {
+      this.scene.objects[this.wordOffset].classes = [];
+    }
+
+    // highlight selected object
+    this.scene.objects[this.wordOffset].classes.push(
+      'animate__animated animate__heartBeat'
+    );
+
+    setTimeout(() => {
+      this.scene.objects.splice(this.wordOffset, 1);
+      this.words.splice(this.wordOffset, 1);
+      if (this.wordOffset > this.words.length - 1) {
+        this.wordOffset--;
+      }
+
+      if (this.words.length === 0) {
+        setTimeout(() => this.router.navigateByUrl('/karte'), 2000);
+      }
+    }, 1000);
+
+    console.info('[COLLECT]', objectName);
   }
 }
