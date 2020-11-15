@@ -1,13 +1,18 @@
-<div
-  class="container"
-  [ngStyle]="{ background: renderBackgroundUrl() }"
->
+<div class="container" [ngStyle]="{ background: renderBackgroundUrl() }">
   <div class="absolute">
     <!-- MAP SYMBOL -->
-    <i class="fas fa-scroll green-dark fa-1x back-to-map" routerLink="/karte"></i>
+    <i
+      *ngIf="scene.objects"
+      class="fas fa-scroll green-dark fa-1x back-to-map"
+      routerLink="/karte"
+    ></i>
 
     <!-- HELP SYMBOL -->
-    <i class="fas fa-question-circle red fa-1x help" (click)="help()"></i>
+    <i
+      *ngIf="scene.objects"
+      class="fas fa-question-circle red fa-1x help"
+      (click)="help()"
+    ></i>
 
     <!-- CLICKABLE OBJECTS -->
     <ng-container *ngFor="let obj of scene.objects">
@@ -15,9 +20,13 @@
     </ng-container>
 
     <!-- PLACEHOLDER OBJECTS -->
+    <ng-container *ngFor="let dec of scene.decoration">
+      <i [class]="renderClasses(dec)" [ngStyle]="renderStyle(dec)"></i>
+    </ng-container>
   </div>
 
   <spark-fountain-advent-container
+    *ngIf="scene.objects"
     [words]="words"
   ></spark-fountain-advent-container>
 </div>

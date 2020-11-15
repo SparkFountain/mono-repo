@@ -15,7 +15,7 @@ export class SceneComponent implements OnInit {
 
   ngOnInit(): void {
     this.words = [];
-    this.scene.objects.forEach((obj: CollectableObject) => {
+    this.scene.objects?.forEach((obj: CollectableObject) => {
       this.words.push(obj.name);
     });
   }
