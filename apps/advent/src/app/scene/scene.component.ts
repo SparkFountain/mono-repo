@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { CollectableObject } from '../interfaces/collectable-object.interface';
 import { Scene } from '../interfaces/scene.interface';
 import { Location } from '@angular/common';
@@ -14,7 +13,7 @@ export class SceneComponent implements OnInit {
   words: string[];
   wordOffset: number;
 
-  constructor(private router: Router, private location: Location) {}
+  constructor(private location: Location) {}
 
   ngOnInit(): void {
     this.words = [];
@@ -89,7 +88,7 @@ export class SceneComponent implements OnInit {
       }
 
       if (this.words.length === 0) {
-        setTimeout(() => this.router.navigateByUrl('/karte'), 3000);
+        setTimeout(() => this.location.back(), 3000);
       }
     }, 1000);
   }
