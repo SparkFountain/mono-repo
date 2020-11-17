@@ -67,11 +67,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./hotel/hotel.module').then((m) => m.HotelModule),
   },
-  {
-    path: '404',
-    loadChildren: () =>
-      import('./not-found/not-found.module').then((m) => m.NotFoundModule),
-  },
+  // {
+  //   path: '404',
+  //   loadChildren: () =>
+  //     import('./not-found/not-found.module').then((m) => m.NotFoundModule),
+  // },
   { path: '**', redirectTo: '/willkommen', pathMatch: 'full' },
 ];
 
