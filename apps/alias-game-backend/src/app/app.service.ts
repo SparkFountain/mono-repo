@@ -1,19 +1,17 @@
 import { Injectable } from '@nestjs/common';
-import { Session, Team } from '@spark-fountain/alias-game';
+import { Card, Color, Session, Team } from '@spark-fountain/alias-game';
+import { TermsService } from '../services/terms.service';
+import { BaseService } from './base.service';
 
 @Injectable()
 export class AppService {
   sessions: Session[];
 
-  /**
-   * Shuffles array in place.
-   */
-  shuffle(array: unknown[]) {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
+  constructor(
+    private baseService: BaseService,
+    private termsService: TermsService
+  ) {
+    this.sessions = [];
   }
 
   /**
@@ -34,28 +32,32 @@ export class AppService {
   /**
    * Creates a new session.
    */
-  createSession(session: Session) {
+  createSession(session: Session): Session {
     const activeTeam: boolean = Math.random() > 0.5;
 
     session.teams[0].active = activeTeam ? true : false;
     session.teams[1].active = activeTeam ? false : true;
 
-    // TODO: refactor or remove
-    // if (
-    //   !this.playerInTeam(session.name, session.teams[0].name, session.creator)
-    // ) {
-    //   this.createPlayer(session.creator, session.name, session.teams[0].name);
-    // }
-
-    this.createSessionColors(session);
+    const colors: string[] = this.createSessionColors(session);
 
     this.sessions.push(session);
+
+    return {
+      name: session.name,
+      creator: session.creator,
+      horizontal: session.horizontal,
+      vertical: session.vertical,
+      themes: session.themes,
+      teams: session.teams,
+      cards: this.createSessionCards(session, colors),
+      started: false,
+    };
   }
 
   /**
    * Creates random colors for a session.
    */
-  createSessionColors(session: Session) {
+  createSessionColors(session: Session): string[] {
     let teamA: number;
     let teamB: number;
     let neutral: number;
@@ -107,7 +109,7 @@ export class AppService {
         break;
     }
 
-    let colors = [];
+    const colors: string[] = [];
     for (let i = 0; i < teamA; i++) {
       colors.push(session.teams[0].color);
     }
@@ -121,7 +123,7 @@ export class AppService {
       colors.push('#222222');
     }
 
-    colors = this.shuffle(colors);
+    return this.baseService.shuffle<string>(colors);
   }
 
   /**
@@ -224,43 +226,30 @@ export class AppService {
   /**
    * Get all cards of a session.
    */
-  getSessionCards($session) {
-    // $sql = "SELECT `horizontal`, `vertical`, `terms` FROM `session` WHERE `name`='$session'";
-    // $result = $db->query($sql);
-    // while($row = $result->fetch_assoc()) {
-    //   $horizontal = $row['horizontal'];
-    //   $vertical = $row['vertical'];
-    //   $termIndexes = json_decode($row['terms']);
-    // }
-    // $colors = getSessionColors($session);
-    // $cardAmount = $horizontal * $vertical;
-    // $sql = "SELECT `id`, `word` FROM `term` WHERE `id` IN (";
-    // for (i=0; i<$cardAmount; i++) {
-    //   $sql .= $termIndexes[i];
-    //   if(i<$cardAmount-1) {
-    //     $sql .= ',';
-    //   }
-    // }
-    // $sql .= ')';
-    // $result = $db->query($sql);
-    // $terms = array();
-    // while($row = $result->fetch_assoc()) {
-    //   $terms[$row['id']] = $row['word'];
-    // }
-    // // now sort the terms
-    // $cards = array();
-    // $rowIndex = 0;
-    // for($j=0; $j<$cardAmount; $j++) {
-    //   array_push($cards, array(
-    //     'x' => $rowIndex % $horizontal,
-    //     'y' => intdiv($rowIndex, $horizontal),
-    //     'word' => $terms[$termIndexes[$j]],
-    //     'color' => $colors[$rowIndex]['color'],
-    //     'uncovered' => $colors[$rowIndex]['uncovered'] ? true : false
-    //   ));
-    //   $rowIndex++;
-    // }
-    // return $cards;
+  createSessionCards(session: Session, colors: string[]): Card[] {
+    const cards: Card[] = [];
+    const cardAmount = session.horizontal * session.vertical;
+
+    const terms: string[] = this.termsService.getTerms(
+      session.themes,
+      cardAmount
+    );
+
+    let rowIndex = 0;
+    for (let j = 0; j < cardAmount; j++) {
+      console.info('[WORD]', terms[j]);
+
+      cards.push({
+        x: rowIndex % session.horizontal,
+        y: Math.floor(rowIndex / session.horizontal),
+        word: terms[j],
+        color: colors[j],
+        uncovered: false,
+      });
+      rowIndex++;
+    }
+
+    return cards;
   }
 
   selectCard($session, $x, $y) {

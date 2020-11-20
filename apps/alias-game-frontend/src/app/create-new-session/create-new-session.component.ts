@@ -47,25 +47,29 @@ export class CreateNewSessionComponent implements OnInit {
 
     this.themes = [
       {
-        name: 'Gemischte Begriffe',
+        name: 'Alltägliches',
         file: 'mixed',
-      },
-      {
-        name: 'Ü 18',
-        file: 'over-18',
-      },
-      {
-        name: 'Party',
-        file: 'party',
       },
       {
         name: 'Jazzchor',
         file: 'jazzchor',
       },
       {
+        name: 'Winter',
+        file: 'winter',
+      },
+      {
+        name: 'Ü 18',
+        file: 'over-18',
+      },
+      {
         name: 'Corona',
         file: 'corona',
       },
+      // {
+      //   name: 'Party',
+      //   file: 'party',
+      // },
     ];
 
     this.sessionForm = new FormGroup({
@@ -201,14 +205,14 @@ export class CreateNewSessionComponent implements OnInit {
     // this.participant = this.session.creator;
 
     // TODO: refactor (use JSON instead)
-    const body = new URLSearchParams();
+    // const body = new URLSearchParams();
     // body.set('creator', this.session.creator);
     // body.set('name', this.session.name);
-    body.set('horizontal', this.selectedBoardSize.substr(0, 1));
-    body.set('vertical', this.selectedBoardSize.substr(4, 1));
+    // body.set('horizontal', this.selectedBoardSize.substr(0, 1));
+    // body.set('vertical', this.selectedBoardSize.substr(4, 1));
 
     // TODO: refactor (multiple teams)
-    body.set('theme', 'todo');
+    // body.set('theme', 'todo');
     // body.set('teams', this.session.teams.toString());
 
     this.http

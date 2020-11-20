@@ -1,15 +1,18 @@
 <div class="game">
   <spark-fountain-alias-game-players
+    *ngIf="false"
     [activeSession]="activeSession"
     (activePlayer)="iAmActivePlayer = $event"
     (leave)="page = 'welcome'"
   ></spark-fountain-alias-game-players>
+
   <spark-fountain-alias-game-board
     [activeSession]="activeSession"
     [participant]="participant"
     [iAmActivePlayer]="iAmActivePlayer"
   ></spark-fountain-alias-game-board>
-  <div class="ui-right">
+
+  <div class="ui-right" *ngIf="false">
     <spark-fountain-alias-game-code-sheet
       [activeSession]="activeSession"
       *ngIf="iAmActivePlayer"
