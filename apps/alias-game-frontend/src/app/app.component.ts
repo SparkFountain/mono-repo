@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TickerMessage } from '@spark-fountain/alias-game';
-import { Observable } from 'rxjs';
-
-import { SessionService } from './services/session.service';
+import { ChatService } from './services/chat/chat.service';
 
 @Component({
   selector: 'spark-fountain-alias-game-root',
@@ -10,21 +7,25 @@ import { SessionService } from './services/session.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  constructor(/* private sessionService: SessionService */) {
-    this.tickerMessages = [];
+  public users: number = 0;
+  public message: string = '';
+  public messages: string[] = [];
+
+  constructor(private chatService: ChatService) {}
+
+  ngOnInit() {
+    this.chatService.receiveChat().subscribe((message: string) => {
+      this.messages.push(message);
+    });
+
+    this.chatService.getUsers().subscribe((users: number) => {
+      this.users = users;
+    });
   }
 
-  views: Observable<number>;
-  public tickerMessages: TickerMessage[];
-
-  ngOnInit(): void {
-    // this.sessionService
-    //   .receiveUpdates()
-    //   .subscribe((tickerMessage: TickerMessage) => {
-    //     console.log('Receiving update:', tickerMessage);
-    //     this.tickerMessages.push(tickerMessage);
-    //   });
-
-    // this.views = this.sessionService.getViews();
+  addChat() {
+    this.messages.push(this.message);
+    this.chatService.sendChat(this.message);
+    this.message = '';
   }
 }

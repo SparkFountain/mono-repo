@@ -9,18 +9,18 @@
   height: auto;
 
   spark-fountain-alias-game-players {
-    width: 300px;
+    width: 100px;
   }
 
   spark-fountain-alias-game-board {
-    width: 904px;
+    width: 1000px;
     height: 600px;
     background: url(/assets/board.jpg);
     box-shadow: 2px 10px 10px $black;
   }
 
   .ui-right {
-    width: 300px;
+    width: 100px;
     background: purple;
     display: flex;
     flex-direction: column;

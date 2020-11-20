@@ -1,20 +1,26 @@
 <div class="title primary">Alias Game</div>
 
-<!-- <table>
-  <thead>
-    <tr>
-      <th>Minute</th>
-      <th>Aktion</th>
-      <th>Beschreibung</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let tickerMessage of tickerMessages">
-      <td>{{ tickerMessage.timeInSec }}</td>
-      <td>{{ tickerMessage.type }}</td>
-      <td>{{ tickerMessage.message }}</td>
-    </tr>
-  </tbody>
-</table> -->
+<div>
+  There are currently <strong>{{ users }}</strong> users online. Start chatting!
+</div>
 
-<router-outlet></router-outlet>
+<ul>
+  <li *ngFor="let message of messages">
+    {{ message }}
+  </li>
+</ul>
+
+<textarea
+  spellcheck="true"
+  autoComplete="true"
+  autocorrect="true"
+  rows="1"
+  class="chat-input"
+  [(ngModel)]="message"
+  placeholder="type message..."
+  (keyup.enter)="addChat()"
+></textarea>
+
+<button (click)="addChat()">Send</button>
+
+<!-- <router-outlet></router-outlet> -->

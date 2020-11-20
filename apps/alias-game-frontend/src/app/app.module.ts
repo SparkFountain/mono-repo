@@ -7,8 +7,10 @@ import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 import { AliasGameModule } from '@spark-fountain/alias-game';
-import { SocketIoModule } from 'ngx-socket-io';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
+
+const config: SocketIoConfig = { url: 'http://localhost:3333', options: {} };
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,11 +20,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     HttpClientModule,
     AliasGameModule,
-    // SocketIoModule.forRoot({
-    //   url: 'http://localhost:3333/api',
-    //   options: {},
-    // }),
     BrowserAnimationsModule,
+    SocketIoModule.forRoot(config),
   ],
   providers: [HttpClient],
   bootstrap: [AppComponent],

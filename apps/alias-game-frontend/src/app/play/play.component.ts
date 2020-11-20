@@ -39,15 +39,15 @@ export class PlayComponent implements OnInit {
           players: [
             {
               name: 'Alf',
-              active: false
+              active: false,
             },
             {
               name: 'Barbara',
-              active: false
+              active: false,
             },
             {
               name: 'Klöten-Klaus',
-              active: false
+              active: false,
             },
           ],
           remainingCards: 7,
@@ -59,15 +59,15 @@ export class PlayComponent implements OnInit {
           players: [
             {
               name: 'Kathi',
-              active: false
+              active: false,
             },
             {
               name: 'Werner',
-              active: false
+              active: false,
             },
             {
               name: 'Kalle Schwansen',
-              active: false
+              active: false,
             },
           ],
           remainingCards: 8,
@@ -106,6 +106,146 @@ export class PlayComponent implements OnInit {
           x: 4,
           y: 0,
           word: 'Fünf',
+          color: '000000',
+          uncovered: true,
+        },
+        {
+          x: 0,
+          y: 1,
+          word: 'Sechs',
+          color: '000000',
+          uncovered: true,
+        },
+        {
+          x: 1,
+          y: 1,
+          word: 'Sieben',
+          color: '000000',
+          uncovered: true,
+        },
+        {
+          x: 2,
+          y: 1,
+          word: 'Acht',
+          color: '000000',
+          uncovered: true,
+        },
+        {
+          x: 3,
+          y: 1,
+          word: 'Neun',
+          color: '000000',
+          uncovered: true,
+        },
+        {
+          x: 4,
+          y: 1,
+          word: 'Zehn',
+          color: '000000',
+          uncovered: true,
+        },
+        {
+          x: 0,
+          y: 2,
+          word: 'Elf',
+          color: '000000',
+          uncovered: true,
+        },
+        {
+          x: 1,
+          y: 2,
+          word: 'Zwölf',
+          color: '000000',
+          uncovered: true,
+        },
+        {
+          x: 2,
+          y: 2,
+          word: 'Dreizehn',
+          color: '000000',
+          uncovered: true,
+        },
+        {
+          x: 3,
+          y: 2,
+          word: 'Vierzehn',
+          color: '000000',
+          uncovered: true,
+        },
+        {
+          x: 4,
+          y: 2,
+          word: 'Fünfzehn',
+          color: '000000',
+          uncovered: true,
+        },
+        {
+          x: 0,
+          y: 3,
+          word: 'Sechzehn',
+          color: '000000',
+          uncovered: true,
+        },
+        {
+          x: 1,
+          y: 3,
+          word: 'Siebzehn',
+          color: '000000',
+          uncovered: true,
+        },
+        {
+          x: 2,
+          y: 3,
+          word: 'Achtzehn',
+          color: '000000',
+          uncovered: true,
+        },
+        {
+          x: 3,
+          y: 3,
+          word: 'Neunzehn',
+          color: '000000',
+          uncovered: true,
+        },
+        {
+          x: 4,
+          y: 3,
+          word: 'Zwanzig',
+          color: '000000',
+          uncovered: true,
+        },
+        {
+          x: 0,
+          y: 4,
+          word: 'Einundzwanzig',
+          color: '000000',
+          uncovered: true,
+        },
+        {
+          x: 1,
+          y: 4,
+          word: 'Zweiundzwanzig',
+          color: '000000',
+          uncovered: true,
+        },
+        {
+          x: 2,
+          y: 4,
+          word: 'Dreiundzwanzig',
+          color: '000000',
+          uncovered: true,
+        },
+        {
+          x: 3,
+          y: 4,
+          word: 'Vierundzwanzig',
+          color: '000000',
+          uncovered: true,
+        },
+        {
+          x: 4,
+          y: 4,
+          word: 'Fünfundzwanzig',
           color: '000000',
           uncovered: true,
         },
