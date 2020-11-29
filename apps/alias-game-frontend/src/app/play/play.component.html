@@ -1,4 +1,6 @@
 <div class="game">
+  <h1>{{ activeSession.name }}</h1>
+
   <spark-fountain-alias-game-players
     *ngIf="false"
     [activeSession]="activeSession"
@@ -7,6 +9,7 @@
   ></spark-fountain-alias-game-players>
 
   <spark-fountain-alias-game-board
+    *ngIf="true"
     [activeSession]="activeSession"
     [participant]="participant"
     [iAmActivePlayer]="iAmActivePlayer"

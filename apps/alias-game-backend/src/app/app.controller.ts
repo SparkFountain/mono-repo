@@ -6,6 +6,7 @@ import {
   JoinSession,
   Response,
   User,
+  Theme,
 } from '@spark-fountain/alias-game';
 import { TermsService } from '../services/terms.service';
 
@@ -15,6 +16,15 @@ export class AppController {
     private readonly appService: AppService,
     private readonly termsService: TermsService
   ) {}
+
+  @Post('get-terms')
+  getTerms(
+    @Body('themes') themes: Theme[],
+    @Body('amount') amount: number,
+    @Body('exclude') exclude?: string[]
+  ): string[] {
+    return this.termsService.getTerms(themes, amount, exclude);
+  }
 
   @Get('get-random-terms')
   getRandomTerms(@Query('amount') amount: number): Promise<string[]> {

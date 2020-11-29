@@ -54,7 +54,7 @@ body {
   font-size: 125px !important;
   font-family: 'Baloo Bhaina 2', cursive !important;
   margin: 150px 0 0 0 !important;
-  color: #00897b;
+  color: $primary;
   text-shadow: -3px 0 $white, 0 3px $white, 3px 0 $white, 0 -3px $white;
 }
 
@@ -97,26 +97,6 @@ h2 {
 
 .active {
   color: $active;
-}
-
-.positive {
-  background: $sea;
-  color: $white;
-
-  &:hover {
-    background: darken($sea, 10%);
-    color: $white;
-  }
-}
-
-.negative {
-  background: $active;
-  color: $white;
-
-  &:hover {
-    background: darken($active, 10%);
-    color: $white;
-  }
 }
 
 .menu-container {

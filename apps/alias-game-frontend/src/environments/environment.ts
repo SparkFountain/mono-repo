@@ -12,6 +12,10 @@ export const environment = {
     ),
   },
 
+  jsonHeader: {
+    headers: new HttpHeaders().set('Content-Type', 'application/json'),
+  },
+
   production: false,
 };
 

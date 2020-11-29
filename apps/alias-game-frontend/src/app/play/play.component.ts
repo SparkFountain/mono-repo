@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Session } from '@spark-fountain/alias-game';
+import { Card, Session } from '@spark-fountain/alias-game';
 
 @Component({
   selector: 'spark-fountain-play',
@@ -23,6 +23,55 @@ export class PlayComponent implements OnInit {
   ngOnInit(): void {
     this.winnerTeam = '';
     this.noActivePlayer = true;
+
+    // TODO: here come the terms for now
+    const terms: string[] = [
+      'Computer',
+      'Performance',
+      'A-Cappella',
+      'Garten',
+      'Abend',
+      'Auto',
+      'Leder',
+      'Rhythmus',
+      'Hund',
+      'Mausefalle',
+      'Jazz',
+      'Musik',
+      'Gesang',
+      'Popmusik',
+      'Mehrstimmig',
+      'Ausstrahlung',
+      'Haus',
+      'Bank',
+      'Bühnenwirkung',
+      'Restaurant',
+      'Zahnarzt',
+      'Intonation',
+      'Groove',
+      'Ziege',
+      'Nasal',
+    ];
+    let cards: Card[] = [];
+
+    let x = 0;
+    let y = 0;
+    terms.forEach((term: string) => {
+      cards.push({
+        x,
+        y,
+        word: term,
+        color: 'ff0000',
+        uncovered: false,
+      });
+
+      if (x === 4) {
+        y++;
+        x = 0;
+      } else {
+        x++;
+      }
+    });
 
     // TODO: refactor (the below stuff is just for debugging)
     this.activeSession = {
@@ -73,183 +122,7 @@ export class PlayComponent implements OnInit {
           remainingCards: 8,
         },
       ],
-      cards: [
-        {
-          x: 0,
-          y: 0,
-          word: 'Eins',
-          color: 'ff0000',
-          uncovered: true,
-        },
-        {
-          x: 1,
-          y: 0,
-          word: 'Zwei',
-          color: '0000ff',
-          uncovered: true,
-        },
-        {
-          x: 2,
-          y: 0,
-          word: 'Drei',
-          color: 'ff0000',
-          uncovered: false,
-        },
-        {
-          x: 3,
-          y: 0,
-          word: 'Vier',
-          color: 'ff0000',
-          uncovered: false,
-        },
-        {
-          x: 4,
-          y: 0,
-          word: 'Fünf',
-          color: '000000',
-          uncovered: true,
-        },
-        {
-          x: 0,
-          y: 1,
-          word: 'Sechs',
-          color: '000000',
-          uncovered: true,
-        },
-        {
-          x: 1,
-          y: 1,
-          word: 'Sieben',
-          color: '000000',
-          uncovered: true,
-        },
-        {
-          x: 2,
-          y: 1,
-          word: 'Acht',
-          color: '000000',
-          uncovered: true,
-        },
-        {
-          x: 3,
-          y: 1,
-          word: 'Neun',
-          color: '000000',
-          uncovered: true,
-        },
-        {
-          x: 4,
-          y: 1,
-          word: 'Zehn',
-          color: '000000',
-          uncovered: true,
-        },
-        {
-          x: 0,
-          y: 2,
-          word: 'Elf',
-          color: '000000',
-          uncovered: true,
-        },
-        {
-          x: 1,
-          y: 2,
-          word: 'Zwölf',
-          color: '000000',
-          uncovered: true,
-        },
-        {
-          x: 2,
-          y: 2,
-          word: 'Dreizehn',
-          color: '000000',
-          uncovered: true,
-        },
-        {
-          x: 3,
-          y: 2,
-          word: 'Vierzehn',
-          color: '000000',
-          uncovered: true,
-        },
-        {
-          x: 4,
-          y: 2,
-          word: 'Fünfzehn',
-          color: '000000',
-          uncovered: true,
-        },
-        {
-          x: 0,
-          y: 3,
-          word: 'Sechzehn',
-          color: '000000',
-          uncovered: true,
-        },
-        {
-          x: 1,
-          y: 3,
-          word: 'Siebzehn',
-          color: '000000',
-          uncovered: true,
-        },
-        {
-          x: 2,
-          y: 3,
-          word: 'Achtzehn',
-          color: '000000',
-          uncovered: true,
-        },
-        {
-          x: 3,
-          y: 3,
-          word: 'Neunzehn',
-          color: '000000',
-          uncovered: true,
-        },
-        {
-          x: 4,
-          y: 3,
-          word: 'Zwanzig',
-          color: '000000',
-          uncovered: true,
-        },
-        {
-          x: 0,
-          y: 4,
-          word: 'Einundzwanzig',
-          color: '000000',
-          uncovered: true,
-        },
-        {
-          x: 1,
-          y: 4,
-          word: 'Zweiundzwanzig',
-          color: '000000',
-          uncovered: true,
-        },
-        {
-          x: 2,
-          y: 4,
-          word: 'Dreiundzwanzig',
-          color: '000000',
-          uncovered: true,
-        },
-        {
-          x: 3,
-          y: 4,
-          word: 'Vierundzwanzig',
-          color: '000000',
-          uncovered: true,
-        },
-        {
-          x: 4,
-          y: 4,
-          word: 'Fünfundzwanzig',
-          color: '000000',
-          uncovered: true,
-        },
-      ],
+      cards,
       started: true,
       description: {
         term: 'Ablauf',

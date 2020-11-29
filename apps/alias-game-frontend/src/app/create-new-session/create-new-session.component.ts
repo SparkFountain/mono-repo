@@ -30,7 +30,6 @@ export class CreateNewSessionComponent implements OnInit {
   public participant: string;
 
   public activeSession: Session;
-  public iAmActivePlayer: boolean;
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -101,40 +100,6 @@ export class CreateNewSessionComponent implements OnInit {
       ]),
       team2Color: new FormControl('', [Validators.required]),
     });
-
-    this.iAmActivePlayer = false;
-
-    // this.session = {
-    //   creator: new FormControl('', [Validators.required, Validators.email]);,
-    //   name: '',
-    //   horizontal: 5,
-    //   vertical: 5,
-    //   themes: this.themes,
-    //   teams: [
-    //     {
-    //       name: '',
-    //       active: false,
-    //       color: '#c22b0c',
-    //       players: [],
-    //       remainingCards: -1,
-    //     },
-    //     {
-    //       name: '',
-    //       active: false,
-    //       color: '#0b6bca',
-    //       players: [],
-    //       remainingCards: -1,
-    //     },
-    //   ],
-    //   cards: [],
-    //   started: false,
-    //   description: {
-    //     term: '',
-    //     amount: -1,
-    //     accepted: false,
-    //     denied: false,
-    //   },
-    // };
   }
 
   getErrorMessage(field: string): string {
@@ -195,28 +160,40 @@ export class CreateNewSessionComponent implements OnInit {
   }
 
   createSession(): void {
-    // this.session = {
-    //   ...this.session,
-    //   horizontal: Number(this.selectedBoardSize.substr(0, 1)),
-    //   vertical: Number(this.selectedBoardSize.substr(4, 1)),
-    //   themes: [],
-    // };
-
-    // this.participant = this.session.creator;
-
-    // TODO: refactor (use JSON instead)
-    // const body = new URLSearchParams();
-    // body.set('creator', this.session.creator);
-    // body.set('name', this.session.name);
-    // body.set('horizontal', this.selectedBoardSize.substr(0, 1));
-    // body.set('vertical', this.selectedBoardSize.substr(4, 1));
-
-    // TODO: refactor (multiple teams)
-    // body.set('theme', 'todo');
-    // body.set('teams', this.session.teams.toString());
+    console.info('[TEAM 1 COLOR]', this.sessionForm.get('team1Color').value);
 
     this.http
-      .post(`/api/create-session`, body.toString(), environment.formHeader)
+      .post(
+        `/api/create-session`,
+        {
+          name: this.sessionForm.get('sessionName').value,
+          creator: this.sessionForm.get('creator').value,
+          horizontal: Number(
+            this.sessionForm.get('selectedBoardSize').value.substr(0, 1)
+          ),
+          vertical: Number(
+            this.sessionForm.get('selectedBoardSize').value.substr(4, 1)
+          ),
+          themes: this.sessionForm.get('selectedThemes').value,
+          teams: [
+            {
+              name: this.sessionForm.get('team1Name').value,
+              active: false,
+              color: this.sessionForm.get('team1Color').value.hex,
+              players: [],
+              remainingCards: -1,
+            },
+            {
+              name: this.sessionForm.get('team2Name').value,
+              active: false,
+              color: this.sessionForm.get('team2Color').value.hex,
+              players: [],
+              remainingCards: -1,
+            },
+          ],
+        },
+        environment.jsonHeader
+      )
       .toPromise()
       .then((response: Response<Session>) => {
         this.activeSession = response.data;

@@ -1,8 +1,9 @@
-import { HttpService, Injectable } from '@nestjs/common';
+import { HttpService, Injectable, Query } from '@nestjs/common';
 import { Theme } from '@spark-fountain/alias-game';
 import { AxiosResponse } from 'axios';
+import { BaseService } from '../app/base.service';
 
-const categories = ['mixed', 'corona', 'winter', 'jazzchor', 'over-18'];  // 'party'
+const categories = ['mixed', 'corona', 'winter', 'jazzchor', 'over-18']; // 'party'
 
 @Injectable()
 export class TermsService {
@@ -15,7 +16,10 @@ export class TermsService {
     party: string[];
   };
 
-  constructor(private httpService: HttpService) {
+  constructor(
+    private httpService: HttpService,
+    private baseService: BaseService
+  ) {
     this.terms = {
       mixed: [
         'Auto',
@@ -632,6 +636,7 @@ export class TermsService {
         'Schwangerschaft',
         'Schwul',
         'Sexappeal',
+        'Ständer',
         'Swingerclub',
         'Telefonsex',
         'Urologe',
@@ -647,28 +652,66 @@ export class TermsService {
   }
 
   getTerms(themes: Theme[], amount: number, exclude?: string[]): string[] {
-    const useTerms: string[] = [];
+    let useTerms: string[] = [];
+
+    const average = Math.ceil(amount / themes.length);
 
     if (themes.find((theme: Theme) => theme.name === 'mixed')) {
+      let index = 0;
       this.terms.mixed.forEach((term: string) => {
-        if (exclude.indexOf(term) === -1) {
+        if (exclude.indexOf(term) === -1 && index < average) {
           useTerms.push(term);
+          index++;
         }
       });
     }
 
     if (themes.find((theme: Theme) => theme.name === 'corona')) {
+      let index = 0;
       this.terms.corona.forEach((term: string) => {
-        if (exclude.indexOf(term) === -1) {
+        if (exclude.indexOf(term) === -1 && index < average) {
           useTerms.push(term);
+          index++;
         }
       });
     }
 
-    return [];
+    if (themes.find((theme: Theme) => theme.name === 'winter')) {
+      let index = 0;
+      this.terms.winter.forEach((term: string) => {
+        if (exclude.indexOf(term) === -1 && index < average) {
+          useTerms.push(term);
+          index++;
+        }
+      });
+    }
+
+    if (themes.find((theme: Theme) => theme.name === 'jazzchor')) {
+      let index = 0;
+      this.terms.jazzchor.forEach((term: string) => {
+        if (exclude.indexOf(term) === -1 && index < average) {
+          useTerms.push(term);
+          index++;
+        }
+      });
+    }
+
+    if (themes.find((theme: Theme) => theme.name === 'over-18')) {
+      let index = 0;
+      this.terms['over-18'].forEach((term: string) => {
+        if (exclude.indexOf(term) === -1 && index < average) {
+          useTerms.push(term);
+          index++;
+        }
+      });
+    }
+
+    useTerms = this.baseService.shuffle(useTerms);
+
+    return useTerms.slice(0, amount);
   }
 
-  getRandomTerms(amount: number): Promise<string[]> {
+  getRandomTerms(@Query('amount') amount: number): Promise<string[]> {
     return this.httpService
       .get(`https://alex-riedel.de/randV2.php?anz=${amount}`)
       .toPromise()
